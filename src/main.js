@@ -4,6 +4,7 @@ import App from './App.vue'
 
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'
+import './assets/sass/custom.scss'
 
 // router setup
 import routes from './routes/routes'
