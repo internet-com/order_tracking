@@ -43,3 +43,14 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 [LICENSE]: ./LICENSE.md
 [version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+
+Database:
+- products(name, unit, price, description, images, external_urls)
+- customers(name, phone_number, notes, external_urls)
+- suppliers(name, phone_number, notes, external_urls)
+- orders(customer_id, item_total, shipment_total, adjustment_total, total, payment_state, shipment_state, state(:requested, :confirming, :processing, :delivering, :completed, :returned), notes)
+- order_items(order_id, product_id, price, quantity)
+- purchase_orders(supplier_id, item_total, shipment_total, adjustment_total, total, payment_state, shipment_state, state(:requested, :confirming, :processing, :completed), notes)
+- purchase_order_items(purchase_order_id, product_id, price, quantity)
+notes:
+- external_urls can be facebook, shopee, taobao... urls
