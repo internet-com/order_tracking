@@ -6,6 +6,26 @@
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
+      <sidebar-link to="/admin/products">
+        <i class="nc-icon nc-atom"></i>
+        <p>Products</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/orders">
+        <i class="nc-icon nc-notes"></i>
+        <p>Orders</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/customers">
+        <i class="nc-icon nc-circle-09"></i>
+        <p>Customers</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/purchase_orders">
+        <i class="nc-icon nc-cart-simple"></i>
+        <p>Purchase Orders</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/suppliers">
+        <i class="nc-icon nc-delivery-fast"></i>
+        <p>Suppliers</p>
+      </sidebar-link>
       <sidebar-link to="/admin/user">
         <i class="nc-icon nc-circle-09"></i>
         <p>User Profile</p>

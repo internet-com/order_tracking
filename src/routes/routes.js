@@ -10,6 +10,11 @@ import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import Icons from 'src/components/Dashboard/Views/Icons.vue'
 import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
+import Products from 'src/components/Dashboard/Views/Products/Products.vue'
+import Orders from 'src/components/Dashboard/Views/Orders/Orders.vue'
+import PurchaseOrders from 'src/components/Dashboard/Views/PurchaseOrders/PurchaseOrders.vue'
+import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
+import Customers from 'src/components/Dashboard/Views/Customers/Customers.vue'
 
 const routes = [
   {
@@ -26,6 +31,31 @@ const routes = [
         path: 'overview',
         name: 'Overview',
         component: Overview
+      },
+      {
+        path: 'products',
+        name: 'Products',
+        component: Products
+      },
+      {
+        path: 'customers',
+        name: 'Customers',
+        component: Customers
+      },
+      {
+        path: 'orders',
+        name: 'Orders',
+        component: Orders
+      },
+      {
+        path: 'purchase_orders',
+        name: 'PurchaseOrders',
+        component: PurchaseOrders
+      },
+      {
+        path: 'suppliers',
+        name: 'Suppliers',
+        component: Suppliers
       },
       {
         path: 'user',
