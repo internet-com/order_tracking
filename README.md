@@ -18,7 +18,7 @@ Vue Light Bootstrap Dashboard is built on top of Bootstrap 4, Vuejs and Vue-rout
 
 The repo uses [vue-cli](https://github.com/vuejs/vue-cli) scaffolding which takes care of the development setup with webpack and all the necessary modern tools to make web development faster and easier.
 
-## [Documentation](https://cristijora.github.io/vue-light-bootstrap-dashboard/documentation/#/buttons)
+### [Template Documentation](https://cristijora.github.io/vue-light-bootstrap-dashboard/documentation/#/buttons)
 
 ## :cloud: Build Setup
 
@@ -33,18 +33,7 @@ The repo uses [vue-cli](https://github.com/vuejs/vue-cli) scaffolding which take
 ### run and watch unit tests
 `npm run unit:watch`
 
-## :clipboard: Contribution guide
-* `npm install` or `yarn install`
-* Please don't use jQuery or jQuery based plugins since there are many pure Vue alternatives
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-[CHANGELOG]: ./CHANGELOG.md
-[LICENSE]: ./LICENSE.md
-[version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg
-[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-
-Database:
+## :clipboard: Database Overview
 - products(name, unit, price, description, images, external_urls)
 - customers(name, phone_number, notes, external_urls)
 - suppliers(name, phone_number, notes, external_urls)
