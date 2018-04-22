@@ -32,7 +32,8 @@
     unit: 'Unit',
     price: 'Price',
     description: 'Description',
-    external_urls: 'External Urls'
+    external_urls: 'External Urls',
+    count: 'Remaining'
   }
   export default {
     components: {
