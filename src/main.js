@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
+require('./elementUI')
 
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'

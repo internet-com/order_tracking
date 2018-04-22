@@ -2,40 +2,50 @@
     <form>
       <div class="row">
         <div class="col-md-12">
-          <fg-input type="text"
-                    label="Name"
-                    placeholder="Name"
-                    v-model="product.name">
-          </fg-input>
+          <div class="form-group">
+            <label class="control-label">
+              Name
+            </label>
+            <el-input placeholder="Please input" v-model="product.name"></el-input>
+          </div>
         </div>
         <div class="col-md-12">
-          <fg-input type="text"
-                    label="Unit"
-                    placeholder="Unit"
-                    v-model="product.unit">
-          </fg-input>
+          <div class="form-group">
+            <label class="control-label">
+              Unit
+            </label>
+            <div>
+              <el-select v-model="product.unit" placeholder="Unit">
+                <el-option
+                  v-for="item in unitOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+          </div>
         </div>
         <div class="col-md-12">
-          <fg-input type="text"
-                    label="Price"
-                    placeholder="Price"
-                    v-model="product.price">
-          </fg-input>
+          <div class="form-group">
+            <label class="control-label">
+              Price
+            </label>
+            <el-input placeholder="Please input" v-model="product.price"></el-input>
+          </div>
         </div>
         <div class="col-md-12">
-          <fg-input type="text"
-                    label="External Url"
-                    placeholder="External Url"
-                    v-model="product.external_urls">
-          </fg-input>
+          <div class="form-group">
+            <label class="control-label">
+              External Link
+            </label>
+            <el-input placeholder="Please input" v-model="product.external_urls"></el-input>
+          </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
             <label>Description</label>
-            <textarea rows="5" class="form-control border-input"
-                      placeholder="Description"
-                      v-model="product.description">
-              </textarea>
+            <el-input type="textarea" v-model="product.description" :autosize="{ minRows: 3 }"></el-input>
           </div>
         </div>
       </div>
@@ -59,7 +69,25 @@
           price: '',
           description: '',
           external_urls: '',
-        }
+        },
+        unitOptions: [
+          {
+            value: '1',
+            label: 'Bo'
+          },
+          {
+            value: '2',
+            label: 'Cai'
+          },
+          {
+            value: '3',
+            label: 'Chiec'
+          },
+          {
+            value: '4',
+            label: 'Doi'
+          }
+        ],
       }
     },
     methods: {
@@ -71,5 +99,7 @@
 
 </script>
 <style>
-
+  .el-select {
+    width: 100%;
+  }
 </style>
