@@ -1,6 +1,6 @@
 # Shop's Baby Sister
 
-> A tool that Helps managing products, orders, stock, customers & suppliers for small shops
+> A tool that helps managing products, orders, stock, customers & suppliers for small shops
 
 This project is built on top of Vue js with [Vue Light Bootstrap Dashboard](https://www.creative-tim.com/product/vue-light-bootstrap-dashboard) template. The dashboard includes Bootstrap 4, vue-router, chartist, google-maps and several other plugins/components.
 

@@ -40,7 +40,7 @@
     props: {
       title: {
         type: String,
-        default: 'Vue LBD'
+        default: "Order Tracking"
       },
       backgroundColor: {
         type: String,

@@ -1,8 +1,8 @@
 {
-  "name": "vue-light-bootstrap-dashboard",
+  "name": "Order Tracking System",
   "version": "0.0.1",
-  "description": "Vue light bootstrap dashboard",
-  "author": "cristijora <joracristi@gmail.com>",
+  "description": "Order Tracking System",
+  "author": "Linh Nguyen <nguyenvanlinh.bk@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
