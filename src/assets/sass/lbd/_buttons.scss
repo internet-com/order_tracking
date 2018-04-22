@@ -57,10 +57,12 @@
 }
 
 .btn{
-     &:disabled,
-     &[disabled],
-     &.disabled{
-        @include opacity(.5);
+    font-size: $font-size-base;
+    line-height: 1.4;
+    &:disabled,
+    &[disabled],
+    &.disabled{
+       @include opacity(.5);
     }
 }
 .btn-round{
