@@ -13,6 +13,7 @@ import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 import Products from 'src/components/Dashboard/Views/Products/Products.vue'
 import NewProduct from 'src/components/Dashboard/Views/Products/NewProduct.vue'
 import Orders from 'src/components/Dashboard/Views/Orders/Orders.vue'
+import NewOrder from 'src/components/Dashboard/Views/Orders/NewOrder.vue'
 import PurchaseOrders from 'src/components/Dashboard/Views/PurchaseOrders/PurchaseOrders.vue'
 import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
 import Customers from 'src/components/Dashboard/Views/Customers/Customers.vue'
@@ -52,6 +53,11 @@ const routes = [
         path: 'orders',
         name: 'Orders',
         component: Orders
+      },
+      {
+        path: 'orders/new',
+        name: 'NewOrder',
+        component: NewOrder
       },
       {
         path: 'purchase_orders',

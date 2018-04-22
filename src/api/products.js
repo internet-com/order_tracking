@@ -6,7 +6,7 @@ const _products = [
     id: 1,
     name: 'Product 1',
     unit: 'cai',
-    price: '11',
+    price: '10000',
     description: 'hang xuat du',
     external_urls: 'www.facebook.com',
     count: 100
@@ -15,7 +15,7 @@ const _products = [
     id: 2,
     name: 'Product 2',
     unit: 'bo',
-    price: '22',
+    price: '20000',
     description: 'hang xuat du',
     external_urls: 'www.shopee.vn',
     count: 50

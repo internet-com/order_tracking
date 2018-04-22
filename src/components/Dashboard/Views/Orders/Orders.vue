@@ -9,7 +9,7 @@
               <p class="card-category">List of all ordesr of the shop</p>
             </template>
             <div class="table-responsive">
-              <button class="btn btn-fill btn-primary">Add new order</button>
+              <router-link :to="{ name: 'NewOrder' }" class="btn btn-fill btn-primary">Add new order</router-link>
               <l-table class="table-hover table-striped"
                        :columns="table.columns"
                        :data="table.data">
