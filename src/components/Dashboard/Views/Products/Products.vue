@@ -11,8 +11,8 @@
             <div class="table-responsive">
               <router-link :to="{ name: 'NewProduct' }" class="btn btn-fill btn-primary">Add new product</router-link>
               <l-table class="table-hover table-striped"
-                       :columns="table.columns"
-                       :data="table.data">
+                       :columns="tableColumns"
+                       :data="products">
               </l-table>
             </div>
           </card>
@@ -24,6 +24,8 @@
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
+  import { mapGetters } from 'vuex'
+
   const tableColumns = {
     id: "Id",
     name: 'Name',
@@ -32,28 +34,23 @@
     description: 'Description',
     external_urls: 'External Urls'
   }
-  const products = [
-    {
-      id: 1,
-      name: 'Test product',
-      unit: 'cai',
-      price: '10000',
-      description: 'hang xuat du',
-      external_urls: 'www.facebook.com',
-    }
-  ]
   export default {
     components: {
       LTable,
       Card
     },
-    data () {
+    data() {
       return {
-        table: {
-          columns: tableColumns,
-          data: [...products]
-        }
+        tableColumns
       }
+    },
+    computed: {
+      ...mapGetters({
+        products: 'products/allProducts'
+      })
+    },
+    created () {
+      this.$store.dispatch('products/getAllProducts')
     }
   }
 </script>
