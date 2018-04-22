@@ -2,13 +2,13 @@
   <table class="table">
     <thead>
       <slot name="columns">
-        <th v-for="column in columns">{{column}}</th>
+        <th v-for="key in columnKeys">{{ columns[key] }}</th>
       </slot>
     </thead>
     <tbody>
     <tr v-for="item in data">
       <slot :row="item">
-        <td v-for="column in columns" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
+        <td v-for="key in columnKeys">{{  item[key] }}</td>
       </slot>
     </tr>
     </tbody>
@@ -18,15 +18,12 @@
   export default {
     name: 'l-table',
     props: {
-      columns: Array,
+      columns: Object,
       data: Array
     },
-    methods: {
-      hasValue (item, column) {
-        return item[column.toLowerCase()] !== 'undefined'
-      },
-      itemValue (item, column) {
-        return item[column.toLowerCase()]
+    computed: {
+      columnKeys(){
+        return Object.keys(this.columns)
       }
     }
   }

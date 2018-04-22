@@ -24,7 +24,14 @@
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
-  const tableColumns = ['Id', 'name', 'unit', 'description', 'external_urls']
+  const tableColumns = {
+    id: "Id",
+    name: 'Name',
+    unit: 'Unit',
+    price: 'Price',
+    description: 'Description',
+    external_urls: 'External Urls'
+  }
   const products = [
     {
       id: 1,
@@ -43,7 +50,7 @@
     data () {
       return {
         table: {
-          columns: [...tableColumns],
+          columns: tableColumns,
           data: [...products]
         }
       }
