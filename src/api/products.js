@@ -21,8 +21,15 @@ const _products = [
 ]
 
 export default {
-  getProducts (cb) {
-    setTimeout(() => cb(_products), 100)
+  getProducts (successCallback) {
+    setTimeout(() => successCallback(_products), 100)
+  },
+
+  createProduct (product, successCallback) {
+    setTimeout(() => {
+      product.id = _products.length + 1
+      successCallback(product)
+    }, 100)
   },
 
   buyProducts (products, cb, errorCb) {

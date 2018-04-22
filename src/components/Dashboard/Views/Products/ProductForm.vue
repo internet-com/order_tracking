@@ -51,15 +51,33 @@
       </div>
       <div>
         <router-link :to="{ name: 'Products' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="updateProduct">
-          Update Product
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createProduct">
+          Create Product
         </button>
       </div>
       <div class="clearfix"></div>
     </form>
 </template>
 <script>
-
+  // mock unitOptions
+  const unitOptions = [
+    {
+      value: '1',
+      label: 'Bo'
+    },
+    {
+      value: '2',
+      label: 'Cai'
+    },
+    {
+      value: '3',
+      label: 'Chiec'
+    },
+    {
+      value: '4',
+      label: 'Doi'
+    }
+  ]
   export default {
     data () {
       return {
@@ -70,29 +88,14 @@
           description: '',
           external_urls: '',
         },
-        unitOptions: [
-          {
-            value: '1',
-            label: 'Bo'
-          },
-          {
-            value: '2',
-            label: 'Cai'
-          },
-          {
-            value: '3',
-            label: 'Chiec'
-          },
-          {
-            value: '4',
-            label: 'Doi'
-          }
-        ],
+        unitOptions,
       }
     },
     methods: {
-      updateProduct () {
-        alert('Your data: ' + JSON.stringify(this.product))
+      createProduct () {
+        this.$store.dispatch('products/createProduct', this.product).then(() => {
+          this.$router.push({ name: 'Products' });
+        })
       }
     }
   }

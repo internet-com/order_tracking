@@ -16,6 +16,11 @@ const actions = {
     productsAPI.getProducts(products => {
       commit('setProducts', products)
     })
+  },
+  createProduct({ commit }, product){
+    productsAPI.createProduct(product, (product) =>{
+      commit('create', product)
+    })
   }
 }
 
@@ -24,10 +29,8 @@ const mutations = {
   setProducts (state, products) {
     state.all = products
   },
-
-  decrementProductInventory (state, { id }) {
-    const product = state.all.find(product => product.id === id)
-    product.inventory--
+  create(state, product){
+    state.all.push(product)
   }
 }
 
