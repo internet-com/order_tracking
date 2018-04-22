@@ -67,7 +67,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <div>
-              <label>Add new product</label>
+              <label>Choose a product</label>
               <div class="row">
                 <div class="col-md-6">
                   <el-select v-model="addingItem.product_id" filterable placeholder="Product">
@@ -215,19 +215,6 @@
     },
     created () {
       this.$store.dispatch('products/getAllProducts')
-    },
-    mounted () {
-      // mock order items for template. Will be add/remove by form btns
-      this.order.orderItems = [
-        {
-          product_id: 1,
-          quantity: 11
-        },
-        {
-          product_id: 2,
-          quantity: 22
-        }
-      ]
     }
   }
 
