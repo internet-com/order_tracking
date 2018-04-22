@@ -9,7 +9,7 @@
               <p class="card-category">List of all products of the shop</p>
             </template>
             <div class="table-responsive">
-              <button class="btn btn-fill btn-primary">Add new product</button>
+              <router-link :to="{ name: 'NewProduct' }" class="btn btn-fill btn-primary">Add new product</router-link>
               <l-table class="table-hover table-striped"
                        :columns="table.columns"
                        :data="table.data">
@@ -24,14 +24,15 @@
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
-  const tableColumns = ['Id', 'Name', 'Salary', 'Country', 'City']
+  const tableColumns = ['Id', 'name', 'unit', 'description', 'external_urls']
   const products = [
     {
       id: 1,
-      name: 'Name',
-      salary: '$36.738',
-      country: 'Niger',
-      city: 'Oud-Turnhout'
+      name: 'Test product',
+      unit: 'cai',
+      price: '10000',
+      description: 'hang xuat du',
+      external_urls: 'www.facebook.com',
     }
   ]
   export default {

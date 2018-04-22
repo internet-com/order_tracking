@@ -11,6 +11,7 @@ import Icons from 'src/components/Dashboard/Views/Icons.vue'
 import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 import Products from 'src/components/Dashboard/Views/Products/Products.vue'
+import NewProduct from 'src/components/Dashboard/Views/Products/NewProduct.vue'
 import Orders from 'src/components/Dashboard/Views/Orders/Orders.vue'
 import PurchaseOrders from 'src/components/Dashboard/Views/PurchaseOrders/PurchaseOrders.vue'
 import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
@@ -36,6 +37,11 @@ const routes = [
         path: 'products',
         name: 'Products',
         component: Products
+      },
+      {
+        path: 'products/new',
+        name: 'NewProduct',
+        component: NewProduct
       },
       {
         path: 'customers',
