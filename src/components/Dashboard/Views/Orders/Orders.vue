@@ -6,14 +6,10 @@
           <card>
             <template slot="header">
               <h4 class="card-title">Orders</h4>
-              <p class="card-category">List of all ordesr of the shop</p>
+              <p class="card-category">List of all orders of the shop</p>
             </template>
             <div class="table-responsive">
               <router-link :to="{ name: 'NewOrder' }" class="btn btn-fill btn-primary">Add new order</router-link>
-              <!-- <l-table class="table-hover table-striped"
-                       :columns="tableColumns"
-                       :data="orders">
-              </l-table> -->
               <table class="table table-hover table-striped">
                 <thead>
                   <th v-for="column in tableColumns">{{ column }}</th>
@@ -36,13 +32,11 @@
   </div>
 </template>
 <script>
-  import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
   const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total']
   export default {
     components: {
-      LTable,
       Card
     },
     data () {
