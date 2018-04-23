@@ -156,7 +156,7 @@
         this.$notifications.notify(
           {
             component: notification,
-            // icon: 'el-icon-error',
+            icon: 'el-icon-warning',
             horizontalAlign: 'center',
             verticalAlign: 'top',
             type: 'danger'
