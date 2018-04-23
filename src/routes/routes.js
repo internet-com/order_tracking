@@ -16,6 +16,7 @@ import Orders from 'src/components/Dashboard/Views/Orders/Orders.vue'
 import NewOrder from 'src/components/Dashboard/Views/Orders/NewOrder.vue'
 import PurchaseOrders from 'src/components/Dashboard/Views/PurchaseOrders/PurchaseOrders.vue'
 import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
+import NewSupplier from 'src/components/Dashboard/Views/Suppliers/NewSupplier.vue'
 import Customers from 'src/components/Dashboard/Views/Customers/Customers.vue'
 import NewCustomer from 'src/components/Dashboard/Views/Customers/NewCustomer.vue'
 
@@ -74,6 +75,11 @@ const routes = [
         path: 'suppliers',
         name: 'Suppliers',
         component: Suppliers
+      },
+      {
+        path: 'suppliers/new',
+        name: 'NewSupplier',
+        component: NewSupplier
       },
       {
         path: 'user',
