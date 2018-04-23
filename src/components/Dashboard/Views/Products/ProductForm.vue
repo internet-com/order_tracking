@@ -97,6 +97,9 @@
           this.$router.push({ name: 'Products' });
         })
       }
+    },
+    created () {
+      this.$store.dispatch('products/getAllProducts')
     }
   }
 

@@ -10,10 +10,24 @@
             </template>
             <div class="table-responsive">
               <router-link :to="{ name: 'NewOrder' }" class="btn btn-fill btn-primary">Add new order</router-link>
-              <l-table class="table-hover table-striped"
-                       :columns="table.columns"
-                       :data="table.data">
-              </l-table>
+              <!-- <l-table class="table-hover table-striped"
+                       :columns="tableColumns"
+                       :data="orders">
+              </l-table> -->
+              <table class="table table-hover table-striped">
+                <thead>
+                  <th v-for="column in tableColumns">{{ column }}</th>
+                </thead>
+                <tbody>
+                <tr v-for="order in orders">
+                  <td>{{ order.id }}</td>
+                  <td>{{ order.customer.name }}</td>
+                  <td>{{ order.shipping_address }}</td>
+                  <td>{{ order.notes }}</td>
+                  <td>{{ order.total }}</td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </card>
         </div>
@@ -24,22 +38,8 @@
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
-  const tableColumns = {
-    id: 'Id',
-    name: 'Name',
-    salary: 'Salary',
-    country: 'Country',
-    city: 'City'
-  }
-  const orders = [
-    {
-      id: 1,
-      name: 'Dakota Rice',
-      salary: '$36.738',
-      country: 'Niger',
-      city: 'Oud-Turnhout'
-    }
-  ]
+  import { mapGetters } from 'vuex'
+  const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total']
   export default {
     components: {
       LTable,
@@ -47,11 +47,19 @@
     },
     data () {
       return {
-        table: {
-          columns: tableColumns,
-          data: [...orders]
-        }
+        tableColumns
       }
+    },
+    computed: {
+      ...mapGetters({
+        orders: 'orders/allOrders'
+      }),
+      formattedOrders(){
+
+      }
+    },
+    created () {
+      this.$store.dispatch('orders/getAllOrders')
     }
   }
 </script>

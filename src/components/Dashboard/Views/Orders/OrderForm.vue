@@ -64,6 +64,7 @@
             <el-input placeholder="Please input" :value="total" disabled></el-input>
           </div>
         </div>
+        <!-- TODO Wrap this one to a component -->
         <div class="col-md-12">
           <div class="form-group">
             <div>
@@ -127,27 +128,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import LTable from 'src/components/UIComponents/Table.vue'
-  // mock unitOptions
-  const customers = [
-    {
-      id: 1,
-      name: 'Linh Nguyen',
-      phone_number: '01656110787',
-      address: 'Ha Noi'
-    },
-    {
-      id: 2,
-      name: 'Ngoc Anh',
-      phone_number: '016549589065',
-      address: 'Ha Noi'
-    },
-    {
-      id: 3,
-      name: 'Minh Ngoc',
-      phone_number: '0123456789',
-      address: 'Hai Phong'
-    },
-  ]
+  import customers from '@/api/mocks/customers'
   const tableColumns = ['Name', 'Price', 'Quantity', 'Total', 'Action']
   export default {
     components: {
@@ -158,10 +139,11 @@
         order: {
           shipping_total: 0,
           adjustment_total: 0,
-          orderItems: []
+          order_items: []
         },
         addingItem: {
           product_id: '',
+          price: 0,
           quantity: 1
         },
         customers,
@@ -173,10 +155,10 @@
         products: 'products/allProducts'
       }),
       hasSelectedItems() {
-        return this.order.orderItems.length > 0
+        return this.order.order_items.length > 0
       },
       formattedOrderItems(){
-        return this.order.orderItems.map((item) => {
+        return this.order.order_items.map((item) => {
           let product = this.products.find(product => product.id == item.product_id)
           let total = product ? product.price * item.quantity : 0
           return {
@@ -191,30 +173,63 @@
       },
       total(){
         return this.itemsTotal + parseInt(this.order.shipping_total) + parseInt(this.order.adjustment_total)
+      },
+      hasCustomer(){
+        return !!this.order.customer_id
+      },
+      hasOrderItems(){
+        return this.order.order_items.length > 0
+      },
+      isValid(){
+        return this.hasCustomer && this.hasOrderItems
       }
+
     },
     methods: {
       createOrder () {
+        if(!this.hasCustomer){
+          return this.notify("Please select a customer")
+        }
+        if(!this.hasOrderItems){
+          return this.notify("Please add at least one product")
+        }
         this.$store.dispatch('orders/createOrder', this.order).then(() => {
-          this.$router.push({ name: 'Products' });
+          this.$router.push({ name: 'Orders' });
         })
       },
       addItem() {
-        if(!this.addingItem.product_id) return
-        let existingItem = this.order.orderItems.find(item => item.product_id == this.addingItem.product_id)
+        let product = this.products.find(product => product.id == this.addingItem.product_id)
+        if(!product) return
+        this.addingItem.price = product.price
+        let existingItem = this.order.order_items.find(item => item.product_id == this.addingItem.product_id)
         if(existingItem) {
           existingItem.quantity += parseInt(this.addingItem.quantity)
         } else {
-          this.order.orderItems.push(this.addingItem)
+          this.order.order_items.push(this.addingItem)
         }
-        this.addingItem = { product_id: '', quantity: 1}
+        this.addingItem = { product_id: '', quantity: 1, price: 0 }
       },
       removeItem(productId) {
-        this.order.orderItems = this.order.orderItems.filter(item => item.product_id != productId);
+        this.order.order_items = this.order.order_items.filter(item => item.product_id != productId);
+      },
+      // TODO move to plugin
+      notify(message) {
+        let notification = {
+          template: `<span>${message}</span>`
+        }
+        this.$notifications.notify(
+          {
+            component: notification,
+            // icon: 'el-icon-error',
+            horizontalAlign: 'center',
+            verticalAlign: 'top',
+            type: 'danger'
+          })
       }
     },
     created () {
       this.$store.dispatch('products/getAllProducts')
+      this.$store.dispatch('orders/getAllOrders')
     }
   }
 
