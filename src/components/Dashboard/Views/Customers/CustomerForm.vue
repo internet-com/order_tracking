@@ -12,26 +12,17 @@
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
-              Unit
+              Phone Number
             </label>
-            <div>
-              <el-select v-model="customer.unit" placeholder="Unit">
-                <el-option
-                  v-for="item in unitOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
+            <el-input placeholder="Please input" v-model="customer.phone_number"></el-input>
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
-              Price
+              Address
             </label>
-            <el-input placeholder="Please input" v-model="customer.price"></el-input>
+            <el-input placeholder="Please input" v-model="customer.address"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -40,12 +31,6 @@
               External Link
             </label>
             <el-input placeholder="Please input" v-model="customer.external_urls"></el-input>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Description</label>
-            <el-input type="textarea" v-model="customer.description" :autosize="{ minRows: 3 }"></el-input>
           </div>
         </div>
       </div>
@@ -59,36 +44,15 @@
     </form>
 </template>
 <script>
-  // mock unitOptions
-  const unitOptions = [
-    {
-      value: '1',
-      label: 'Bo'
-    },
-    {
-      value: '2',
-      label: 'Cai'
-    },
-    {
-      value: '3',
-      label: 'Chiec'
-    },
-    {
-      value: '4',
-      label: 'Doi'
-    }
-  ]
   export default {
     data () {
       return {
         customer: {
           name: '',
-          unit: '',
-          price: '',
-          description: '',
+          phone_number: '',
+          address: '',
           external_urls: '',
-        },
-        unitOptions,
+        }
       }
     },
     methods: {

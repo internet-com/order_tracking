@@ -7,6 +7,7 @@ const _orders = [
       phone_number: '01656110787',
       address: 'Ha Noi'
     },
+    order_items: [],
     shipping_address: 'Hoang Mai, Ha Noi',
     notes: '10000',
     shipping_total: 50,
@@ -22,6 +23,7 @@ const _orders = [
       phone_number: '016549589065',
       address: 'Ha Noi'
     },
+    order_items: [],
     shipping_address: 'Vinh Bao, Hai Phong',
     notes: '10000',
     shipping_total: 50,

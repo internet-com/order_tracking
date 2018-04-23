@@ -9,7 +9,7 @@
               <p class="card-category">List of all customers of the shop</p>
             </template>
             <div class="table-responsive">
-              <button class="btn btn-fill btn-primary">Add new customer</button>
+              <router-link :to="{ name: 'NewCustomer' }" class="btn btn-fill btn-primary">Add new customer</router-link>
               <l-table class="table-hover table-striped"
                        :columns="tableColumns"
                        :data="customers">
@@ -30,17 +30,10 @@
     id: 'Id',
     name: 'Name',
     phone_number: 'Phone Number',
-    address: 'Address'
+    address: 'Address',
+    external_urls: 'External URLs'
   }
-  const customers = [
-    {
-      id: 1,
-      name: 'Dakota Rice',
-      salary: '$36.738',
-      country: 'Niger',
-      city: 'Oud-Turnhout'
-    }
-  ]
+
   export default {
     components: {
       LTable,
