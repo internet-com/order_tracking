@@ -11,8 +11,8 @@
             <div class="table-responsive">
               <button class="btn btn-fill btn-primary">Add new customer</button>
               <l-table class="table-hover table-striped"
-                       :columns="table.columns"
-                       :data="table.data">
+                       :columns="tableColumns"
+                       :data="customers">
               </l-table>
             </div>
           </card>
@@ -24,12 +24,13 @@
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
+  import { mapGetters } from 'vuex'
+
   const tableColumns = {
     id: 'Id',
     name: 'Name',
-    salary: 'Salary',
-    country: 'Country',
-    city: 'City'
+    phone_number: 'Phone Number',
+    address: 'Address'
   }
   const customers = [
     {
@@ -47,11 +48,16 @@
     },
     data () {
       return {
-        table: {
-          columns: tableColumns,
-          data: [...customers]
-        }
+        tableColumns
       }
+    },
+    computed: {
+      ...mapGetters({
+        customers: 'customers/allCustomers'
+      })
+    },
+    created () {
+      this.$store.dispatch('customers/getAllCustomers')
     }
   }
 </script>
