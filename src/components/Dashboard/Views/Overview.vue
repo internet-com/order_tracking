@@ -266,7 +266,8 @@
             {title: 'Create 4 Invisible User Experiences you Never Knew About', checked: false},
             {title: 'Read "Following makes Medium better"', checked: false},
             {title: 'Unfollow 5 enemies from twitter', checked: false}
-          ]
+          ],
+          columns: {}
         }
       }
     }
