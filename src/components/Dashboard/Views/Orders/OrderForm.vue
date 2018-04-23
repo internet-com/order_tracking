@@ -64,55 +64,9 @@
             <el-input placeholder="Please input" :value="total" disabled></el-input>
           </div>
         </div>
-        <!-- TODO Wrap this one to a component -->
         <div class="col-md-12">
           <div class="form-group">
-            <div>
-              <label>Choose a product</label>
-              <div class="row">
-                <div class="col-md-6">
-                  <el-select v-model="addingItem.product_id" filterable placeholder="Product">
-                    <el-option
-                      v-for="product in products"
-                      :key="product.id"
-                      :label="product.name"
-                      :value="product.id">
-                    </el-option>
-                  </el-select>
-                </div>
-                <div class="col-md-2">
-                  <el-input placeholder="Quantity" v-model="addingItem.quantity"></el-input>
-                </div>
-                <div class="col-md-2">
-                  <el-button type="primary" icon="el-icon-plus" @click="addItem">Add</el-button>
-                </div>
-              </div>
-            </div>
-            <div style="margin-top: 10px">
-              <label>Selected products</label>
-              <div  v-if="hasSelectedItems" class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <th v-for="column in tableColumns">{{ column }}</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="orderItem in formattedOrderItems" v-if="orderItem.product">
-                      <td>{{ orderItem.product.name }}</td>
-                      <td>{{ orderItem.product.price }}</td>
-                      <td>{{ orderItem.quantity }}</td>
-                      <td>{{ orderItem.total }}</td>
-                      <td>
-                        <el-button type="primary" icon="el-icon-edit" size="mini" circle></el-button>
-                        <el-button type="danger" icon="el-icon-delete" size="mini" circle @click="removeItem(orderItem.product.id)"></el-button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div v-else>
-                <p class="text-danger">No item selected. Please select at least one!</p>
-              </div>
-            </div>
+            <order-items-select v-model="order.order_items" />
           </div>
         </div>
       </div>
@@ -126,13 +80,15 @@
     </form>
 </template>
 <script>
-  import { mapGetters } from 'vuex'
   import LTable from 'src/components/UIComponents/Table.vue'
+  import OrderItemsSelect from './OrderItemsSelect'
   import customers from '@/api/mocks/customers'
-  const tableColumns = ['Name', 'Price', 'Quantity', 'Total', 'Action']
+  import { mapGetters } from 'vuex'
+
   export default {
     components: {
-      LTable
+      LTable,
+      OrderItemsSelect
     },
     data () {
       return {
@@ -141,44 +97,24 @@
           adjustment_total: 0,
           order_items: []
         },
-        addingItem: {
-          product_id: '',
-          price: 0,
-          quantity: 1
-        },
-        customers,
-        tableColumns
+        customers
       }
     },
     computed: {
       ...mapGetters({
         products: 'products/allProducts'
       }),
-      hasSelectedItems() {
-        return this.order.order_items.length > 0
-      },
-      formattedOrderItems(){
-        return this.order.order_items.map((item) => {
-          let product = this.products.find(product => product.id == item.product_id)
-          let total = product ? product.price * item.quantity : 0
-          return {
-            product,
-            total,
-            quantity: item.quantity
-          }
-        })
-      },
       itemsTotal(){
-        return this.formattedOrderItems.reduce(((sum, item) => item.total + sum), 0)
+        return this.order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
         return this.itemsTotal + parseInt(this.order.shipping_total) + parseInt(this.order.adjustment_total)
       },
+      hasSelectedItems() {
+        return this.order.order_items.length > 0
+      },
       hasCustomer(){
         return !!this.order.customer_id
-      },
-      hasOrderItems(){
-        return this.order.order_items.length > 0
       },
       isValid(){
         return this.hasCustomer && this.hasOrderItems
@@ -190,7 +126,7 @@
         if(!this.hasCustomer){
           return this.notify("Please select a customer")
         }
-        if(!this.hasOrderItems){
+        if(!this.hasSelectedItems){
           return this.notify("Please add at least one product")
         }
         this.$store.dispatch('orders/createOrder', this.order).then(() => {
@@ -215,7 +151,7 @@
       // TODO move to plugin
       notify(message) {
         let notification = {
-          template: `<span>${message}</span>`
+          template: `<span><b>${message}</b></span>`
         }
         this.$notifications.notify(
           {
@@ -228,7 +164,6 @@
       }
     },
     created () {
-      this.$store.dispatch('products/getAllProducts')
       this.$store.dispatch('orders/getAllOrders')
     }
   }
