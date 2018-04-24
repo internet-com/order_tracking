@@ -14,7 +14,7 @@ export default {
       order.customer = _customers.find(customer => customer.id == order.customer_id)
       order.state = OrderState.requested
       let itemsTotal = order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
-      order.total = itemsTotal + parseInt(order.shipping_total) + parseInt(order.adjustment_total)
+      order.total = itemsTotal + parseInt(order.shipment_total) + parseInt(order.adjustment_total)
       successCallback(order)
     }, 100)
   },

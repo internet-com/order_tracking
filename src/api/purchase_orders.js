@@ -12,7 +12,7 @@ export default {
       purchase_order.id = _purchase_orders.length + 1
       purchase_order.supplier = _suppliers.find(supplier => supplier.id == purchase_order.supplier_id)
       let itemsTotal = purchase_order.purchase_order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
-      purchase_order.total = itemsTotal + parseInt(purchase_order.shipping_total) + parseInt(purchase_order.adjustment_total)
+      purchase_order.total = itemsTotal + parseInt(purchase_order.shipment_total) + parseInt(purchase_order.adjustment_total)
       successCallback(purchase_order)
     }, 100)
   },

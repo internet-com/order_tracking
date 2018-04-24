@@ -20,6 +20,13 @@
                   <td>{{ purchase_order.supplier.name }}</td>
                   <td>{{ purchase_order.notes }}</td>
                   <td>{{ purchase_order.total }}</td>
+                  <td><el-tag :type="stateType(purchase_order)" class="order__state">{{ purchase_order.state }}</el-tag></td>
+                  <td>
+                    <el-row>
+                      <el-button type="warning" icon="el-icon-edit" circle></el-button>
+                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </el-row>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -33,7 +40,10 @@
 <script>
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
-  const tableColumns = ['Id', 'Supplier Name', 'Notes', 'Total']
+  import { PurchaseOrderState } from '@/settings/purchase_orders'
+
+  const tableColumns = ['Id', 'Supplier Name', 'Notes', 'Total', 'Actions']
+
   export default {
     components: {
       Card
@@ -48,10 +58,26 @@
         purchase_orders: 'purchase_orders/allPurchaseOrders'
       })
     },
+    methods: {
+      stateType(purchase_order) {
+        switch(purchase_order.state){
+          case PurchaseOrderState.requested:
+            return 'info'
+          case PurchaseOrderState.processing:
+            return  ''
+          case PurchaseOrderState.completed:
+            return  'success'
+        }
+      }
+    },
     created () {
       this.$store.dispatch('purchase_orders/getAllPurchaseOrders')
     }
   }
 </script>
-<style>
+<style scoped>
+  .order__state {
+    width: 80px;
+    text-align: center;
+  }
 </style>

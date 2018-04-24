@@ -24,7 +24,7 @@
                   <td><el-tag :type="stateType(order)" class="order__state">{{ order.state }}</el-tag></td>
                   <td>
                     <el-row>
-                      <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                      <el-button type="warning" icon="el-icon-edit" circle></el-button>
                       <el-button type="danger" icon="el-icon-delete" circle></el-button>
                     </el-row>
                   </td>

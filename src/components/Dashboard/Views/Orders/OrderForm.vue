@@ -35,9 +35,9 @@
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
-              Shipping Total
+              Shipment Total
             </label>
-            <el-input placeholder="Please input" v-model="order.shipping_total"></el-input>
+            <el-input placeholder="Please input" v-model="order.shipment_total"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -92,7 +92,7 @@
     data () {
       return {
         order: {
-          shipping_total: 0,
+          shipment_total: 0,
           adjustment_total: 0,
           order_items: []
         }
@@ -107,7 +107,7 @@
         return this.order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
-        return this.itemsTotal + parseInt(this.order.shipping_total) + parseInt(this.order.adjustment_total)
+        return this.itemsTotal + parseInt(this.order.shipment_total) + parseInt(this.order.adjustment_total)
       },
       hasSelectedItems() {
         return this.order.order_items.length > 0

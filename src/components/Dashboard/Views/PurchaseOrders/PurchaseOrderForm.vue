@@ -20,14 +20,6 @@
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <label class="control-label">
-              Shipping Address
-            </label>
-            <el-input placeholder="Please input" v-model="purchase_order.shipping_address"></el-input>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
             <label>Notes</label>
             <el-input type="textarea" v-model="purchase_order.notes" :autosize="{ minRows: 3 }"></el-input>
           </div>
@@ -35,9 +27,9 @@
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
-              Shipping Total
+              Shipment Total
             </label>
-            <el-input placeholder="Please input" v-model="purchase_order.shipping_total"></el-input>
+            <el-input placeholder="Please input" v-model="purchase_order.shipment_total"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -92,7 +84,7 @@
     data () {
       return {
         purchase_order: {
-          shipping_total: 0,
+          shipment_total: 0,
           adjustment_total: 0,
           purchase_order_items: []
         }
@@ -107,7 +99,7 @@
         return this.purchase_order.purchase_order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
-        return this.itemsTotal + parseInt(this.purchase_order.shipping_total) + parseInt(this.purchase_order.adjustment_total)
+        return this.itemsTotal + parseInt(this.purchase_order.shipment_total) + parseInt(this.purchase_order.adjustment_total)
       },
       hasSelectedItems() {
         return this.purchase_order.purchase_order_items.length > 0
