@@ -21,7 +21,13 @@
                   <td>{{ order.shipping_address }}</td>
                   <td>{{ order.notes }}</td>
                   <td>{{ order.total }}</td>
-                  <td>{{ order.state }}</td>
+                  <td><el-tag :type="stateType(order)" class="order__state">{{ order.state }}</el-tag></td>
+                  <td>
+                    <el-row>
+                      <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </el-row>
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -35,7 +41,10 @@
 <script>
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
-  const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total', 'State']
+  import { OrderState } from '@/settings/orders'
+
+  const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total', 'State', 'Actions']
+
   export default {
     components: {
       Card
@@ -50,10 +59,30 @@
         orders: 'orders/allOrders'
       })
     },
+    methods: {
+      stateType(order) {
+        switch(order.state){
+          case OrderState.requested:
+            return 'info'
+          case OrderState.processing:
+            return  ''
+          case OrderState.delivering:
+            return  'warning'
+          case OrderState.completed:
+            return  'success'
+          case OrderState.returned:
+            return  'danger'
+        }
+      }
+    },
     created () {
       this.$store.dispatch('orders/getAllOrders')
     }
   }
 </script>
-<style>
+<style scoped>
+  .order__state {
+    width: 80px;
+    text-align: center;
+  }
 </style>
