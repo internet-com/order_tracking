@@ -47,10 +47,7 @@
     computed: {
       ...mapGetters({
         orders: 'orders/allOrders'
-      }),
-      formattedOrders(){
-
-      }
+      })
     },
     created () {
       this.$store.dispatch('orders/getAllOrders')

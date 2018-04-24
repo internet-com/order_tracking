@@ -4,15 +4,15 @@
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
-              Customer
+              Supplier
             </label>
             <div>
-              <el-select v-model="order.customer_id" filterable placeholder="Customer">
+              <el-select v-model="purchase_order.supplier_id" filterable placeholder="Supplier">
                 <el-option
-                  v-for="customer in customers"
-                  :key="customer.id"
-                  :label="customer.name"
-                  :value="customer.id">
+                  v-for="supplier in suppliers"
+                  :key="supplier.id"
+                  :label="supplier.name"
+                  :value="supplier.id">
                 </el-option>
               </el-select>
             </div>
@@ -23,13 +23,13 @@
             <label class="control-label">
               Shipping Address
             </label>
-            <el-input placeholder="Please input" v-model="order.shipping_address"></el-input>
+            <el-input placeholder="Please input" v-model="purchase_order.shipping_address"></el-input>
           </div>
         </div>
         <div class="col-md-12">
           <div class="form-group">
             <label>Notes</label>
-            <el-input type="textarea" v-model="order.notes" :autosize="{ minRows: 3 }"></el-input>
+            <el-input type="textarea" v-model="purchase_order.notes" :autosize="{ minRows: 3 }"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -37,7 +37,7 @@
             <label class="control-label">
               Shipping Total
             </label>
-            <el-input placeholder="Please input" v-model="order.shipping_total"></el-input>
+            <el-input placeholder="Please input" v-model="purchase_order.shipping_total"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -45,7 +45,7 @@
             <label class="control-label">
               Adjustment Total
             </label>
-            <el-input placeholder="Please input" v-model="order.adjustment_total"></el-input>
+            <el-input placeholder="Please input" v-model="purchase_order.adjustment_total"></el-input>
           </div>
         </div>
         <div class="col-md-12">
@@ -66,14 +66,14 @@
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <order-items-select v-model="order.order_items" />
+            <order-items-select v-model="purchase_order.purchase_order_items" />
           </div>
         </div>
       </div>
       <div>
-        <router-link :to="{ name: 'Orders' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createOrder">
-          Create Order
+        <router-link :to="{ name: 'PurchaseOrders' }" class="btn btn-default btn-fill">Cancel</router-link>
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createPurchaseOrder">
+          Create PurchaseOrder
         </button>
       </div>
       <div class="clearfix"></div>
@@ -81,7 +81,7 @@
 </template>
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
-  import OrderItemsSelect from './OrderItemsSelect'
+  import OrderItemsSelect from '../Orders/OrderItemsSelect'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -91,61 +91,61 @@
     },
     data () {
       return {
-        order: {
+        purchase_order: {
           shipping_total: 0,
           adjustment_total: 0,
-          order_items: []
+          purchase_order_items: []
         }
       }
     },
     computed: {
       ...mapGetters({
         products: 'products/allProducts',
-        customers: 'customers/allCustomers'
+        suppliers: 'suppliers/allSuppliers'
       }),
       itemsTotal(){
-        return this.order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+        return this.purchase_order.purchase_order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
-        return this.itemsTotal + parseInt(this.order.shipping_total) + parseInt(this.order.adjustment_total)
+        return this.itemsTotal + parseInt(this.purchase_order.shipping_total) + parseInt(this.purchase_order.adjustment_total)
       },
       hasSelectedItems() {
-        return this.order.order_items.length > 0
+        return this.purchase_order.purchase_order_items.length > 0
       },
-      hasCustomer(){
-        return !!this.order.customer_id
+      hasSupplier(){
+        return !!this.purchase_order.supplier_id
       },
       isValid(){
-        return this.hasCustomer && this.hasOrderItems
+        return this.hasSupplier && this.hasPurchaseOrderItems
       }
 
     },
     methods: {
-      createOrder () {
-        if(!this.hasCustomer){
-          return this.notify("Please select a customer")
+      createPurchaseOrder () {
+        if(!this.hasSupplier){
+          return this.notify("Please select a supplier")
         }
         if(!this.hasSelectedItems){
           return this.notify("Please add at least one product")
         }
-        this.$store.dispatch('orders/createOrder', this.order).then(() => {
-          this.$router.push({ name: 'Orders' });
+        this.$store.dispatch('purchase_orders/createPurchaseOrder', this.purchase_order).then(() => {
+          this.$router.push({ name: 'PurchaseOrders' });
         })
       },
       addItem() {
         let product = this.products.find(product => product.id == this.addingItem.product_id)
         if(!product) return
         this.addingItem.price = product.price
-        let existingItem = this.order.order_items.find(item => item.product_id == this.addingItem.product_id)
+        let existingItem = this.purchase_order.purchase_order_items.find(item => item.product_id == this.addingItem.product_id)
         if(existingItem) {
           existingItem.quantity += parseInt(this.addingItem.quantity)
         } else {
-          this.order.order_items.push(this.addingItem)
+          this.purchase_order.purchase_order_items.push(this.addingItem)
         }
         this.addingItem = { product_id: '', quantity: 1, price: 0 }
       },
       removeItem(productId) {
-        this.order.order_items = this.order.order_items.filter(item => item.product_id != productId);
+        this.purchase_order.purchase_order_items = this.purchase_order.purchase_order_items.filter(item => item.product_id != productId);
       },
       // TODO move to plugin
       notify(message) {
@@ -163,8 +163,8 @@
       }
     },
     created () {
-      this.$store.dispatch('customers/getAllCustomers')
-      this.$store.dispatch('orders/getAllOrders')
+      this.$store.dispatch('suppliers/getAllSuppliers')
+      this.$store.dispatch('purchase_orders/getAllPurchaseOrders')
     }
   }
 

@@ -4,6 +4,7 @@ import products from './modules/products'
 import orders from './modules/orders'
 import customers from './modules/customers'
 import suppliers from './modules/suppliers'
+import purchase_orders from './modules/purchase_orders'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     products,
     orders,
     customers,
-    suppliers
+    suppliers,
+    purchase_orders
   }
 })
