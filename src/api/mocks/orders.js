@@ -1,4 +1,5 @@
 import _customers from './customers'
+import { OrderState } from '@/settings/orders'
 
 const _orders = [
   {
@@ -10,7 +11,8 @@ const _orders = [
     shipping_total: 50,
     adjustment_total: -50,
     items_total: 100,
-    total: 100
+    total: 100,
+    state: OrderState.requested
   },
   {
     id: 2,
@@ -21,7 +23,8 @@ const _orders = [
     shipping_total: 50,
     adjustment_total: 50,
     items_total: 100,
-    total: 200
+    total: 200,
+    state: OrderState.completed
   },
 ]
 export default _orders

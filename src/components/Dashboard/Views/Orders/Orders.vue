@@ -21,6 +21,7 @@
                   <td>{{ order.shipping_address }}</td>
                   <td>{{ order.notes }}</td>
                   <td>{{ order.total }}</td>
+                  <td>{{ order.state }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -34,7 +35,7 @@
 <script>
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
-  const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total']
+  const tableColumns = ['Id', 'Customer Name', 'Shipping Address', 'Notes', 'Total', 'State']
   export default {
     components: {
       Card
