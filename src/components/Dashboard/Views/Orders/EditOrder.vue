@@ -22,11 +22,6 @@
       Card,
       OrderForm
     },
-    data() {
-      return {
-        // order: {}
-      }
-    },
     computed: {
       ...mapGetters({
         order: 'orders/order'
