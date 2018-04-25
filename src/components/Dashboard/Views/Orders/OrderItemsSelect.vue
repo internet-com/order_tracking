@@ -114,6 +114,7 @@
 	    }
     },
     created () {
+      this.order_items = this.value.slice(0)
       this.$store.dispatch('products/getAllProducts')
     }
 	}
