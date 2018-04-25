@@ -72,9 +72,7 @@
       </div>
       <div>
         <router-link :to="{ name: 'Orders' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="submit">
-          Create Order
-        </button>
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="submit">{{ submitButtonLabel }}</button>
       </div>
       <div class="clearfix"></div>
     </form>
@@ -114,6 +112,9 @@
       },
       actionName(){
         return this.order.id ? 'orders/updateOrder' : 'orders/createOrder'
+      },
+      submitButtonLabel() {
+        return this.order.id ? 'Update Order' : 'Create Order'
       }
 
     },
