@@ -18,6 +18,23 @@
             </div>
           </div>
         </div>
+        <div class="col-md-12" v-if="isEditForm">
+          <div class="form-group">
+            <label class="control-label">
+              Status
+            </label>
+            <div>
+              <el-select v-model="order.state" placeholder="Status">
+                <el-option
+                  v-for="state in Object.keys(OrderState)"
+                  :key="state"
+                  :label="OrderState[state]"
+                  :value="state">
+                </el-option>
+              </el-select>
+            </div>
+          </div>
+        </div>
         <div class="col-md-12">
           <div class="form-group">
             <label class="control-label">
@@ -81,6 +98,7 @@
   import LTable from 'src/components/UIComponents/Table.vue'
   import OrderItemsSelect from './OrderItemsSelect'
   import { mapGetters } from 'vuex'
+  import { OrderState } from '@/settings/orders'
 
   export default {
     components: {
@@ -89,6 +107,11 @@
     },
     props: {
       order: Object
+    },
+    data() {
+      return {
+        OrderState
+      }
     },
     computed: {
       ...mapGetters({
@@ -110,13 +133,15 @@
       isValid(){
         return this.hasCustomer && this.hasOrderItems
       },
+      isEditForm() {
+        return !!this.order.id
+      },
       actionName(){
-        return this.order.id ? 'orders/updateOrder' : 'orders/createOrder'
+        return this.isEditForm ? 'orders/updateOrder' : 'orders/createOrder'
       },
       submitButtonLabel() {
-        return this.order.id ? 'Update Order' : 'Create Order'
+        return this.isEditForm ? 'Update Order' : 'Create Order'
       }
-
     },
     methods: {
       submit () {
