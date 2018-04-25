@@ -5,7 +5,7 @@
         <div class="col-md-12">
 				  <card>
 				    <h4 slot="header" class="card-title">New Order</h4>
-	          <order-form/>
+	          <order-form :order="newOrder"/>
   				</card>
         </div>
       </div>
@@ -20,6 +20,15 @@
     components: {
       Card,
       OrderForm
+    },
+    data() {
+      return {
+        newOrder: {
+          shipment_total: 0,
+          adjustment_total: 0,
+          order_items: []
+        }
+      }
     }
   }
 

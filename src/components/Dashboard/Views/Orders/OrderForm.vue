@@ -72,7 +72,7 @@
       </div>
       <div>
         <router-link :to="{ name: 'Orders' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createOrder">
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="submit">
           Create Order
         </button>
       </div>
@@ -89,14 +89,8 @@
       LTable,
       OrderItemsSelect
     },
-    data () {
-      return {
-        order: {
-          shipment_total: 0,
-          adjustment_total: 0,
-          order_items: []
-        }
-      }
+    props: {
+      order: Object
     },
     computed: {
       ...mapGetters({
@@ -117,18 +111,21 @@
       },
       isValid(){
         return this.hasCustomer && this.hasOrderItems
+      },
+      actionName(){
+        return this.order.id ? 'orders/updateOrder' : 'orders/createOrder'
       }
 
     },
     methods: {
-      createOrder () {
+      submit () {
         if(!this.hasCustomer){
           return this.notify("Please select a customer")
         }
         if(!this.hasSelectedItems){
           return this.notify("Please add at least one product")
         }
-        this.$store.dispatch('orders/createOrder', this.order).then(() => {
+        this.$store.dispatch(this.actionName, this.order).then(() => {
           this.$router.push({ name: 'Orders' });
         })
       },
