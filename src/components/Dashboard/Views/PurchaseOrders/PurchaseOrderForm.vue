@@ -115,10 +115,10 @@
     methods: {
       createPurchaseOrder () {
         if(!this.hasSupplier){
-          return this.notify("Please select a supplier")
+          return this.$customNotify("Please select a supplier", 'danger')
         }
         if(!this.hasSelectedItems){
-          return this.notify("Please add at least one product")
+          return this.$customNotify("Please add at least one product", 'danger')
         }
         this.$store.dispatch('purchase_orders/createPurchaseOrder', this.purchase_order).then(() => {
           this.$router.push({ name: 'PurchaseOrders' });
@@ -138,20 +138,6 @@
       },
       removeItem(productId) {
         this.purchase_order.purchase_order_items = this.purchase_order.purchase_order_items.filter(item => item.product_id != productId);
-      },
-      // TODO move to plugin
-      notify(message) {
-        let notification = {
-          template: `<span><b>${message}</b></span>`
-        }
-        this.$notifications.notify(
-          {
-            component: notification,
-            icon: 'el-icon-warning',
-            horizontalAlign: 'center',
-            verticalAlign: 'top',
-            type: 'danger'
-          })
       }
     },
     created () {

@@ -60,22 +60,9 @@
         this.$store.dispatch('customers/createCustomer', this.customer).then(customer => {
           this.$router.push({ name: 'Customers' });
           let successMessage = `Customer ${customer.name} has been created!`
-          this.notify(successMessage, 'success')
+          this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
-          errorMessages.forEach(message => this.notify(message, 'danger'))
-        })
-      },
-      notify(message, type) {
-        let component = {
-          template: `<span><b>${message}</b></span>`
-        }
-        let icon = (type == 'success') ? 'el-icon-success' : 'el-icon-warning'
-        this.$notifications.notify({
-          horizontalAlign: 'center',
-          verticalAlign: 'top',
-          component,
-          icon,
-          type
+          errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       }
     },

@@ -11,9 +11,11 @@ import './assets/sass/custom.scss'
 // router setup
 import routes from './routes/routes'
 import axios from './api/vue-axios'
+import customNotify from './plugins/customNotify'
 // plugin setup
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
+Vue.use(customNotify)
 
 // configure router
 const router = new VueRouter({

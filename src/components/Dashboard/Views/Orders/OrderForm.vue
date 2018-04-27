@@ -146,15 +146,15 @@
     methods: {
       submit () {
         if(!this.hasCustomer){
-          return this.notify("Please select a customer", 'danger')
+          return this.$customNotify("Please select a customer", 'danger')
         }
         if(!this.hasSelectedItems){
-          return this.notify("Please add at least one product", 'danger')
+          return this.$customNotify("Please add at least one product", 'danger')
         }
         let successMessage = this.isEditForm ? "Order has been updated successfully" : "Order has been created successfully"
         this.$store.dispatch(this.actionName, this.order).then(() => {
           this.$router.push({ name: 'Orders' });
-          this.notify(successMessage, 'success')
+          this.$customNotify(successMessage, 'success')
         })
       },
       addItem() {
@@ -171,20 +171,6 @@
       },
       removeItem(productId) {
         this.order.order_items = this.order.order_items.filter(item => item.product_id != productId);
-      },
-      // TODO move to plugin
-      notify(message, type) {
-        let notification = {
-          template: `<span><b>${message}</b></span>`
-        }
-        this.$notifications.notify(
-          {
-            component: notification,
-            icon: 'el-icon-warning',
-            horizontalAlign: 'center',
-            verticalAlign: 'top',
-            type: type
-          })
       }
     },
     created () {
