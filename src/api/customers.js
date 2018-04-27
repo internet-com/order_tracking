@@ -1,8 +1,9 @@
 import _customers from '@/api/mocks/customers'
+import Vue from 'vue'
 
 export default {
-  getCustomers (successCallback) {
-    setTimeout(() => successCallback(_customers), 100)
+  getCustomers() {
+    return Vue.axios.get('customers')
   },
 
   createCustomer (customer, successCallback) {

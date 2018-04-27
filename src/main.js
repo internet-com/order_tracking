@@ -10,6 +10,7 @@ import './assets/sass/custom.scss'
 
 // router setup
 import routes from './routes/routes'
+import axios from './api/vue-axios'
 // plugin setup
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
@@ -26,5 +27,6 @@ new Vue({
   el: '#app',
   store,
   router,
+  axios,
   render: h => h(App)
 })

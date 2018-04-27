@@ -13,7 +13,8 @@ const getters = {
 // actions
 const actions = {
   getAllCustomers ({ commit }) {
-    customersAPI.getCustomers(customers => {
+    customersAPI.getCustomers().then(response => {
+      let customers = response.data
       commit('setCustomers', customers)
     })
   },
