@@ -1,4 +1,3 @@
-import _customers from '@/api/mocks/customers'
 import Vue from 'vue'
 
 export default {
@@ -6,11 +5,7 @@ export default {
     return Vue.axios.get('customers')
   },
 
-  createCustomer (customer, successCallback) {
-    setTimeout(() => {
-      // actual data will be return from server
-      customer.id = _customers.length + 1
-      successCallback(customer)
-    }, 100)
+  createCustomer (customer) {
+    return Vue.axios.post('customers', { customer })
   },
 }

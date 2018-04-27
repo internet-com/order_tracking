@@ -19,8 +19,13 @@ const actions = {
     })
   },
   createCustomer({ commit }, customer){
-    customersAPI.createCustomer(customer, (customer) =>{
+    return customersAPI.createCustomer(customer).then(response => {
+      let customer = response.data
       commit('create', customer)
+      return Promise.resolve(customer)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
     })
   }
 }
