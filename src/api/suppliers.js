@@ -1,15 +1,11 @@
-import _suppliers from '@/api/mocks/suppliers'
+import Vue from 'vue'
 
 export default {
-  getSuppliers (successCallback) {
-    setTimeout(() => successCallback(_suppliers), 100)
+  getSuppliers() {
+    return Vue.axios.get('suppliers')
   },
 
-  createSupplier (supplier, successCallback) {
-    setTimeout(() => {
-      // actual data will be return from server
-      supplier.id = _suppliers.length + 1
-      successCallback(supplier)
-    }, 100)
+  createSupplier (supplier) {
+    return Vue.axios.post('suppliers', { supplier })
   },
 }

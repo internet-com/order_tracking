@@ -57,8 +57,12 @@
     },
     methods: {
       createSupplier () {
-        this.$store.dispatch('suppliers/createSupplier', this.supplier).then(() => {
+        this.$store.dispatch('suppliers/createSupplier', this.supplier).then(supplier => {
           this.$router.push({ name: 'Suppliers' });
+          let successMessage = `Supplier ${supplier.name} has been created!`
+          this.$customNotify(successMessage, 'success')
+        }).catch(errorMessages => {
+          errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       }
     },

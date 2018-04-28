@@ -13,13 +13,19 @@ const getters = {
 // actions
 const actions = {
   getAllSuppliers ({ commit }) {
-    suppliersAPI.getSuppliers(suppliers => {
+    suppliersAPI.getSuppliers().then(response => {
+      let suppliers = response.data
       commit('setSuppliers', suppliers)
     })
   },
   createSupplier({ commit }, supplier){
-    suppliersAPI.createSupplier(supplier, (supplier) =>{
+    return suppliersAPI.createSupplier(supplier).then(response => {
+      let supplier = response.data
       commit('create', supplier)
+      return Promise.resolve(supplier)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
     })
   }
 }
