@@ -119,20 +119,19 @@
         customers: 'customers/allCustomers'
       }),
       itemsTotal(){
-        let activeItems = this.order.order_items_attributes.filter(item => !item._destroy)
-        return activeItems.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+        return this.activeOrderItems.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
         return this.itemsTotal + parseInt(this.order.shipment_total) + parseInt(this.order.adjustment_total)
       },
+      activeOrderItems() {
+        return this.order.order_items_attributes.filter(item => !item._destroy)
+      },
       hasSelectedItems() {
-        return this.order.order_items_attributes.length > 0
+        return this.activeOrderItems.length > 0
       },
       hasCustomer(){
         return !!this.order.customer_id
-      },
-      isValid(){
-        return this.hasCustomer && this.hasOrderItems
       },
       isEditForm() {
         return !!this.order.id
