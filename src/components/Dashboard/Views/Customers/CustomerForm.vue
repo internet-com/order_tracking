@@ -77,6 +77,3 @@
     width: 100%;
   }
 </style>
-
-
-<span data-notify="icon" class="alert-icon el-icon-warning"></span>
