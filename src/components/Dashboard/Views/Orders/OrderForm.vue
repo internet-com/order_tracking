@@ -119,7 +119,8 @@
         customers: 'customers/allCustomers'
       }),
       itemsTotal(){
-        return this.order.order_items_attributes.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+        let activeItems = this.order.order_items_attributes.filter(item => !item._destroy)
+        return activeItems.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
         return this.itemsTotal + parseInt(this.order.shipment_total) + parseInt(this.order.adjustment_total)
@@ -156,21 +157,6 @@
           this.$router.push({ name: 'Orders' });
           this.$customNotify(successMessage, 'success')
         })
-      },
-      addItem() {
-        let product = this.products.find(product => product.id == this.addingItem.product_id)
-        if(!product) return
-        this.addingItem.price = product.price
-        let existingItem = this.order.order_items_attributes.find(item => item.product_id == this.addingItem.product_id)
-        if(existingItem) {
-          existingItem.quantity += parseInt(this.addingItem.quantity)
-        } else {
-          this.order.order_items_attributes.push(this.addingItem)
-        }
-        this.addingItem = { product_id: '', quantity: 1, price: 0 }
-      },
-      removeItem(productId) {
-        this.order.order_items_attributes = this.order.order_items_attributes.filter(item => item.product_id != productId);
       }
     },
     created () {

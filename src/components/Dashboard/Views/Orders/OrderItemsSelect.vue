@@ -77,7 +77,7 @@
         products: 'products/allProducts'
       }),
       formattedOrderItems(){
-        return this.order_items.map((item) => {
+        return this.activeOrderItems.map((item) => {
           let product = this.products.find(product => product.id == item.product_id)
           let total = product ? product.price * item.quantity : 0
           return {
@@ -86,6 +86,9 @@
             quantity: item.quantity
           }
         })
+      },
+      activeOrderItems() {
+        return this.order_items.filter(item => !item._destroy)
       },
       hasSelectedItems() {
         return this.order_items.length > 0
@@ -96,7 +99,7 @@
         let product = this.products.find(product => product.id == this.addingItem.product_id)
         if(!product) return
         this.addingItem.price = product.price
-        let existingItem = this.order_items.find(item => item.product_id == this.addingItem.product_id)
+        let existingItem = this.activeOrderItems.find(item => item.product_id == this.addingItem.product_id)
         if(existingItem) {
           existingItem.quantity += parseInt(this.addingItem.quantity)
         } else {
@@ -106,7 +109,12 @@
         this.update()
       },
       removeItem(productId) {
-        this.order_items = this.order_items.filter(item => item.product_id != productId);
+        let item = this.activeOrderItems.find(item => item.product_id == productId)
+        if(item.id) {
+          item._destroy = true
+        } else {
+          this.order_items = this.order_items.filter(item => item.product_id != productId);
+        }
         this.update()
       },
       update() {

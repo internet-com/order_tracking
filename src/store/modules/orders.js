@@ -27,6 +27,7 @@ const actions = {
   getOrder({ commit }, orderId){
     OrdersAPI.getOrder(orderId).then(response => {
       let order = response.data
+      order.order_items_attributes = order.order_items
       commit('setOrder', order)
     })
   },
