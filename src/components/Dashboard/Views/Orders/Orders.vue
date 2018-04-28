@@ -17,7 +17,7 @@
                 <tbody>
                 <tr v-for="order in orders">
                   <td>{{ order.id }}</td>
-                  <td>{{ order.customer.name }}</td>
+                  <td>{{ order.customer && order.customer.name }}</td>
                   <td>{{ order.shipping_address }}</td>
                   <td>{{ order.notes }}</td>
                   <td>{{ order.total }}</td>

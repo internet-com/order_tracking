@@ -83,7 +83,7 @@
         </div>
         <div class="col-md-12">
           <div class="form-group">
-            <order-items-select v-model="order.order_items" />
+            <order-items-select v-model="order.order_items_attributes" />
           </div>
         </div>
       </div>
@@ -119,13 +119,13 @@
         customers: 'customers/allCustomers'
       }),
       itemsTotal(){
-        return this.order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+        return this.order.order_items_attributes.reduce(((sum, item) => item.price * item.quantity + sum), 0)
       },
       total(){
         return this.itemsTotal + parseInt(this.order.shipment_total) + parseInt(this.order.adjustment_total)
       },
       hasSelectedItems() {
-        return this.order.order_items.length > 0
+        return this.order.order_items_attributes.length > 0
       },
       hasCustomer(){
         return !!this.order.customer_id
@@ -161,16 +161,16 @@
         let product = this.products.find(product => product.id == this.addingItem.product_id)
         if(!product) return
         this.addingItem.price = product.price
-        let existingItem = this.order.order_items.find(item => item.product_id == this.addingItem.product_id)
+        let existingItem = this.order.order_items_attributes.find(item => item.product_id == this.addingItem.product_id)
         if(existingItem) {
           existingItem.quantity += parseInt(this.addingItem.quantity)
         } else {
-          this.order.order_items.push(this.addingItem)
+          this.order.order_items_attributes.push(this.addingItem)
         }
         this.addingItem = { product_id: '', quantity: 1, price: 0 }
       },
       removeItem(productId) {
-        this.order.order_items = this.order.order_items.filter(item => item.product_id != productId);
+        this.order.order_items_attributes = this.order.order_items_attributes.filter(item => item.product_id != productId);
       }
     },
     created () {

@@ -26,7 +26,7 @@
         newOrder: {
           shipment_total: 0,
           adjustment_total: 0,
-          order_items: []
+          order_items_attributes: []
         }
       }
     }

@@ -1,34 +1,16 @@
-import _customers from '@/api/mocks/customers'
-import _orders from '@/api/mocks/orders'
-import { OrderState } from '@/settings/orders'
+import Vue from 'vue'
 
 export default {
-  getOrders (successCallback) {
-    setTimeout(() => successCallback(_orders), 100)
+  getOrders() {
+    return Vue.axios.get('orders')
   },
-  getOrder (orderId, successCallback) {
-    setTimeout(() => {
-      let order = _orders.find(order => order.id == orderId)
-      successCallback(order)
-    }, 100)
+  getOrder(id) {
+    return Vue.axios.get(`orders/${ id }`)
   },
-  createOrder (order, successCallback) {
-    setTimeout(() => {
-       // actual data will be return from server
-      order.id = _orders.length + 1
-      order.customer = _customers.find(customer => customer.id == order.customer_id)
-      order.state = OrderState.requested
-      let itemsTotal = order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
-      order.total = itemsTotal + parseInt(order.shipment_total) + parseInt(order.adjustment_total)
-      successCallback(order)
-    }, 100)
+  createOrder(order) {
+    return Vue.axios.post('orders', { order })
   },
-  updateOrder (order, successCallback) {
-    setTimeout(() => {
-       // actual data will be return from server
-      let itemsTotal = order.order_items.reduce(((sum, item) => item.price * item.quantity + sum), 0)
-      order.total = itemsTotal + parseInt(order.shipment_total) + parseInt(order.adjustment_total)
-      successCallback(order)
-    }, 100)
+  updateOrder (order) {
+    return Vue.axios.put(`orders/${ order.id }`, { order })
   },
 }

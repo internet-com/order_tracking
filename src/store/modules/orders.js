@@ -6,7 +6,7 @@ const state = {
   order: {
     shipment_total: 0,
     adjustment_total: 0,
-    order_items: []
+    order_items_attributes: []
   }
 }
 
@@ -19,25 +19,35 @@ const getters = {
 // actions
 const actions = {
   getAllOrders ({ commit }) {
-    OrdersAPI.getOrders(orders => {
+    OrdersAPI.getOrders().then(response => {
+      let orders = response.data
       commit('setOrders', orders)
     })
   },
   getOrder({ commit }, orderId){
-    OrdersAPI.getOrder(orderId, (order) =>{
+    OrdersAPI.getOrder(orderId).then(response => {
+      let order = response.data
       commit('setOrder', order)
     })
   },
   createOrder({ commit }, order){
-    OrdersAPI.createOrder(order, (order) =>{
-      commit('create', order)
+    return OrdersAPI.createOrder(order).then(response => {
+      let order = response.data
+      return Promise.resolve(order)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
     })
   },
   updateOrder({ commit }, order){
-    OrdersAPI.updateOrder(order, (order) =>{
-      //
+    return OrdersAPI.updateOrder(order).then(response => {
+      let order = response.data
+      return Promise.resolve(order)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
     })
-  }
+  },
 }
 
 // mutations
@@ -47,9 +57,6 @@ const mutations = {
   },
   setOrder(state, order){
     state.order = order
-  },
-  create(state, order){
-    state.all.push(order)
   }
 }
 
