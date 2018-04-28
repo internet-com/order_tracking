@@ -93,8 +93,12 @@
     },
     methods: {
       createProduct () {
-        this.$store.dispatch('products/createProduct', this.product).then(() => {
+        this.$store.dispatch('products/createProduct', this.product).then(product => {
           this.$router.push({ name: 'Products' });
+          let successMessage = `Product ${product.name} has been created!`
+          this.$customNotify(successMessage, 'success')
+        }).catch(errorMessages => {
+          errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       }
     },

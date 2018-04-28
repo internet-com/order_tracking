@@ -13,13 +13,19 @@ const getters = {
 // actions
 const actions = {
   getAllProducts ({ commit }) {
-    productsAPI.getProducts(products => {
+    productsAPI.getProducts().then(response => {
+      let products = response.data
       commit('setProducts', products)
     })
   },
   createProduct({ commit }, product){
-    productsAPI.createProduct(product, (product) =>{
+    return productsAPI.createProduct(product).then(response => {
+      let product = response.data
       commit('create', product)
+      return Promise.resolve(product)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
     })
   }
 }
