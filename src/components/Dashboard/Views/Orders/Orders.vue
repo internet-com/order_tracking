@@ -75,11 +75,11 @@
         }
       },
       remove(order) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
-            console.log(1)
+        this.$confirm('Are you sure to close this dialog?').then(() => {
+          this.$store.dispatch('orders/deleteOrder', order).then(() => {
+            this.$customNotify("Order has been deleted successfully")
           })
-          .catch(_ => {});
+        })
       }
     },
     created () {

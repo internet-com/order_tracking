@@ -49,6 +49,16 @@ const actions = {
       return Promise.reject(errorMessages)
     })
   },
+  deleteOrder({ commit }, order){
+    return OrdersAPI.deleteOrder(order).then(response => {
+      let orders = state.all.filter(o => o.id != order.id)
+      commit('setOrders', orders)
+      return Promise.resolve(order)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
+    })
+  },
 }
 
 // mutations

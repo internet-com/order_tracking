@@ -13,4 +13,7 @@ export default {
   updateOrder (order) {
     return Vue.axios.put(`orders/${ order.id }`, { order })
   },
+  deleteOrder (order) {
+    return Vue.axios.delete(`orders/${ order.id }`)
+  }
 }
