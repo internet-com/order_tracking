@@ -26,7 +26,7 @@
                       <router-link :to="{ name: 'EditOrder', params: { orderId: order.id } }">
                         <el-button type="warning" icon="el-icon-edit" circle></el-button>
                       </router-link>
-                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                      <el-button type="danger" icon="el-icon-delete" circle @click="remove(order)"></el-button>
                   </td>
                 </tr>
                 </tbody>
@@ -73,6 +73,13 @@
           case OrderState.returned:
             return  'danger'
         }
+      },
+      remove(order) {
+        this.$confirm('Are you sure to close this dialog?')
+          .then(_ => {
+            console.log(1)
+          })
+          .catch(_ => {});
       }
     },
     created () {

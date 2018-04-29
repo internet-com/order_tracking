@@ -165,8 +165,3 @@
   }
 
 </script>
-<style>
-  .el-select {
-    width: 100%;
-  }
-</style>
