@@ -24,6 +24,8 @@
     data() {
       return {
         newPurchaseOrder: {
+          supplier_id: 1,
+          notes: '',
           shipment_total: 0,
           adjustment_total: 0,
           purchase_order_items_attributes: []
@@ -31,8 +33,4 @@
       }
     }
   }
-
 </script>
-<style>
-
-</style>

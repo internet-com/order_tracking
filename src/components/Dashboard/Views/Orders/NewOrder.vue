@@ -24,6 +24,9 @@
     data() {
       return {
         newOrder: {
+          customer_id: 1,
+          notes: '',
+          shipping_address: '',
           shipment_total: 0,
           adjustment_total: 0,
           order_items_attributes: []
@@ -31,8 +34,4 @@
       }
     }
   }
-
 </script>
-<style>
-
-</style>

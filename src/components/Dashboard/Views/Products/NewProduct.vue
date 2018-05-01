@@ -24,14 +24,12 @@
     data() {
       return {
         newProduct: {
-          price: 0,
-          unit: 1
+          name: '',
+          description: '',
+          external_urls: '',
+          price: 0
         }
       }
     }
   }
-
 </script>
-<style>
-
-</style>
