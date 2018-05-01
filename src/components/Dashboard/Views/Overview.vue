@@ -8,8 +8,8 @@
               <i class="nc-icon nc-chart text-warning"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Capacity</p>
-              <h4 class="card-title">105GB</h4>
+              <p class="card-category">Total Revenue</p>
+              <h4 class="card-title">{{ statistics.total_revenue }}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-refresh"></i>Updated now
@@ -23,8 +23,8 @@
               <i class="nc-icon nc-light-3 text-success"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Revenue</p>
-              <h4 class="card-title">$1,345</h4>
+              <p class="card-category">Total Profit</p>
+              <h4 class="card-title">{{ statistics.total_profit }}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-calendar-o"></i>Last day
@@ -38,8 +38,8 @@
               <i class="nc-icon nc-vector text-danger"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Errors</p>
-              <h4 class="card-title">23</h4>
+              <p class="card-category">Total Orders count</p>
+              <h4 class="card-title">{{ statistics.total_orders_count }}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-clock-o"></i>Last day
@@ -53,8 +53,8 @@
               <i class="nc-icon nc-favourite-28 text-primary"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Followers</p>
-              <h4 class="card-title">+45</h4>
+              <p class="card-category">New Orders count</p>
+              <h4 class="card-title">{{ statistics.new_orders_count }}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-refresh"></i>Updated now
@@ -175,6 +175,7 @@
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import LTable from 'src/components/UIComponents/Table.vue'
   import Checkbox from 'src/components/UIComponents/Inputs/Checkbox.vue'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {
@@ -270,6 +271,14 @@
           columns: {}
         }
       }
+    },
+    computed: {
+      ...mapGetters({
+        statistics: 'statistics/statistics'
+      })
+    },
+    created() {
+      this.$store.dispatch('statistics/getStatistics')
     }
   }
 </script>

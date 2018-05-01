@@ -60,19 +60,19 @@
   // mock unitOptions
   const unitOptions = [
     {
-      value: '1',
+      value: 'Bo',
       label: 'Bo'
     },
     {
-      value: '2',
+      value: 'Cai',
       label: 'Cai'
     },
     {
-      value: '3',
+      value: 'Chiec',
       label: 'Chiec'
     },
     {
-      value: '4',
+      value: 'Doi',
       label: 'Doi'
     }
   ]
