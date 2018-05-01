@@ -1,33 +1,60 @@
-import customersAPI from '@/api/customers'
+import CustomersAPI from '@/api/customers'
 
 // initial state
 const state = {
-  all: []
+  all: [],
+  customer: {}
 }
 
 // getters
 const getters = {
-  allCustomers: state => state.all
+  allCustomers: state => state.all,
+  customer: state => state.customer
 }
 
 // actions
 const actions = {
   getAllCustomers ({ commit }) {
-    customersAPI.getCustomers().then(response => {
+    CustomersAPI.getCustomers().then(response => {
       let customers = response.data
       commit('setCustomers', customers)
     })
   },
-  createCustomer({ commit }, customer){
-    return customersAPI.createCustomer(customer).then(response => {
+  getCustomer({ commit }, customerId){
+    CustomersAPI.getCustomer(customerId).then(response => {
       let customer = response.data
-      commit('create', customer)
+      customer.customer_items_attributes = customer.customer_items
+      commit('setCustomer', customer)
+    })
+  },
+  createCustomer({ commit }, customer){
+    return CustomersAPI.createCustomer(customer).then(response => {
+      let customer = response.data
       return Promise.resolve(customer)
     }).catch(error => {
       let errorMessages = error.response.data
       return Promise.reject(errorMessages)
     })
-  }
+  },
+  updateCustomer({ commit }, customer){
+    return CustomersAPI.updateCustomer(customer).then(response => {
+      let customer = response.data
+      return Promise.resolve(customer)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
+    })
+  },
+  deleteCustomer({ commit }, customer){
+    return CustomersAPI.deleteCustomer(customer).then(response => {
+      let customers = state.all.filter(o => o.id != customer.id)
+      commit('setCustomers', customers)
+      return Promise.resolve(customer)
+    }).catch(error => {
+      let errorMessages = error.response.data
+      return Promise.reject(errorMessages)
+    })
+  },
 }
 
 // mutations
@@ -35,8 +62,8 @@ const mutations = {
   setCustomers (state, customers) {
     state.all = customers
   },
-  create(state, customer){
-    state.all.push(customer)
+  setCustomer(state, customer){
+    state.customer = customer
   }
 }
 

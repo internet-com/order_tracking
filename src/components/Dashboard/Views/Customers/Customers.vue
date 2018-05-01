@@ -10,10 +10,26 @@
             </template>
             <div class="table-responsive">
               <router-link :to="{ name: 'NewCustomer' }" class="btn btn-fill btn-primary">Add new customer</router-link>
-              <l-table class="table-hover table-striped"
-                       :columns="tableColumns"
-                       :data="customers">
-              </l-table>
+              <table class="table table-hover table-striped">
+                <thead>
+                  <th v-for="column in tableColumns">{{ column }}</th>
+                </thead>
+                <tbody>
+                <tr v-for="customer in customers">
+                  <td>{{ customer.id }}</td>
+                  <td>{{ customer.name }}</td>
+                  <td>{{ customer.phone_number }}</td>
+                  <td>{{ customer.address }}</td>
+                  <td>{{ customer.external_urls }}</td>
+                  <td>
+                      <router-link :to="{ name: 'EditCustomer', params: { customerId: customer.id } }">
+                        <el-button type="warning" icon="el-icon-edit" circle></el-button>
+                      </router-link>
+                      <el-button type="danger" icon="el-icon-delete" circle @click="remove(customer)"></el-button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </card>
         </div>
@@ -26,13 +42,7 @@
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
 
-  const tableColumns = {
-    id: 'Id',
-    name: 'Name',
-    phone_number: 'Phone Number',
-    address: 'Address',
-    external_urls: 'External URLs'
-  }
+  const tableColumns = ['Id', 'Name', 'Phong Number', 'Address', 'External Urls', 'Actions']
 
   export default {
     components: {
@@ -49,10 +59,19 @@
         customers: 'customers/allCustomers'
       })
     },
+    methods: {
+      remove(customer) {
+        this.$confirm('Are you sure to delete this customer?').then(() => {
+          this.$store.dispatch('customers/deleteCustomer', customer).then((customer) => {
+            this.$customNotify("Customer has been deleted successfully")
+          }).catch((errorMessages) => {
+            this.$customNotify("Customer has been linked to some order/purchase orders. Please remove them first! Consider to use hiding customer feature instead of removing.", 'danger')
+          })
+        })
+      }
+    },
     created () {
       this.$store.dispatch('customers/getAllCustomers')
     }
   }
 </script>
-<style>
-</style>

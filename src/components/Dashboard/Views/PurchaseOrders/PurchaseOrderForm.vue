@@ -147,6 +147,8 @@
         this.$store.dispatch(this.actionName, this.purchaseOrder).then(() => {
           this.$router.push({ name: 'PurchaseOrders' });
           this.$customNotify(successMessage, 'success')
+        }).catch(errorMessages => {
+          errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       }
     },

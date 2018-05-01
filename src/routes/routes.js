@@ -23,6 +23,7 @@ import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
 import NewSupplier from 'src/components/Dashboard/Views/Suppliers/NewSupplier.vue'
 import Customers from 'src/components/Dashboard/Views/Customers/Customers.vue'
 import NewCustomer from 'src/components/Dashboard/Views/Customers/NewCustomer.vue'
+import EditCustomer from 'src/components/Dashboard/Views/Customers/EditCustomer.vue'
 
 const routes = [
   {
@@ -64,6 +65,11 @@ const routes = [
         path: 'customers/new',
         name: 'NewCustomer',
         component: NewCustomer
+      },
+      {
+        path: 'customers/:customerId/edit',
+        name: 'EditCustomer',
+        component: EditCustomer
       },
       {
         path: 'orders',

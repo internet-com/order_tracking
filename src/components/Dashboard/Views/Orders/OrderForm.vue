@@ -158,6 +158,8 @@
         this.$store.dispatch(this.actionName, this.order).then(() => {
           this.$router.push({ name: 'Orders' });
           this.$customNotify(successMessage, 'success')
+        }).catch(errorMessages => {
+          errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       },
       updateShippingAddress() {
