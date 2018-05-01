@@ -10,10 +10,26 @@
             </template>
             <div class="table-responsive">
               <router-link :to="{ name: 'NewSupplier' }" class="btn btn-fill btn-primary">Add new supplier</router-link>
-              <l-table class="table-hover table-striped"
-                       :columns="tableColumns"
-                       :data="suppliers">
-              </l-table>
+              <table class="table table-hover table-striped">
+                <thead>
+                  <th v-for="column in tableColumns">{{ column }}</th>
+                </thead>
+                <tbody>
+                <tr v-for="supplier in suppliers">
+                  <td>{{ supplier.id }}</td>
+                  <td>{{ supplier.name }}</td>
+                  <td>{{ supplier.phone_number }}</td>
+                  <td>{{ supplier.address }}</td>
+                  <td>{{ supplier.external_urls }}</td>
+                  <td>
+                      <router-link :to="{ name: 'EditSupplier', params: { supplierId: supplier.id } }">
+                        <el-button type="warning" icon="el-icon-edit" circle></el-button>
+                      </router-link>
+                      <el-button type="danger" icon="el-icon-delete" circle @click="remove(supplier)"></el-button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </card>
         </div>
@@ -26,13 +42,7 @@
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
 
-  const tableColumns = {
-    id: 'Id',
-    name: 'Name',
-    phone_number: 'Phone Number',
-    address: 'Address',
-    external_urls: 'External URLs'
-  }
+  const tableColumns = ['Id', 'Name', 'Phong Number', 'Address', 'External Urls', 'Actions']
 
   export default {
     components: {
@@ -49,10 +59,19 @@
         suppliers: 'suppliers/allSuppliers'
       })
     },
+    methods: {
+      remove(supplier) {
+        this.$confirm('Are you sure to delete this supplier?').then(() => {
+          this.$store.dispatch('suppliers/deleteSupplier', supplier).then((supplier) => {
+            this.$customNotify("Supplier has been deleted successfully")
+          }).catch((errorMessages) => {
+            this.$customNotify("Supplier has been linked to some order/purchase orders. Please remove them first! Consider to use hiding supplier feature instead of removing.", 'danger')
+          })
+        })
+      }
+    },
     created () {
       this.$store.dispatch('suppliers/getAllSuppliers')
     }
   }
 </script>
-<style>
-</style>

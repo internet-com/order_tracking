@@ -36,30 +36,32 @@
       </div>
       <div>
         <router-link :to="{ name: 'Suppliers' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createSupplier">
-          Create Supplier
-        </button>
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="submit">{{ submitButtonLabel }}</button>
       </div>
       <div class="clearfix"></div>
     </form>
 </template>
 <script>
   export default {
-    data () {
-      return {
-        supplier: {
-          name: '',
-          phone_number: '',
-          address: '',
-          external_urls: '',
-        }
-      }
+    props: {
+      supplier: Object
+    },
+    computed: {
+      isEditForm() {
+        return !!this.supplier.id
+      },
+      actionName(){
+        return this.isEditForm ? 'suppliers/updateSupplier' : 'suppliers/createSupplier'
+      },
+      submitButtonLabel() {
+        return this.isEditForm ? 'Update Supplier' : 'Create Supplier'
+      },
     },
     methods: {
-      createSupplier () {
-        this.$store.dispatch('suppliers/createSupplier', this.supplier).then(supplier => {
+      submit () {
+        let successMessage = this.isEditForm ? "Supplier has been updated successfully" : "Supplier has been created successfully"
+        this.$store.dispatch(this.actionName, this.supplier).then(() => {
           this.$router.push({ name: 'Suppliers' });
-          let successMessage = `Supplier ${supplier.name} has been created!`
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))
@@ -67,6 +69,4 @@
       }
     }
   }
-
 </script>
-<style>

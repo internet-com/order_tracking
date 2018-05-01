@@ -5,7 +5,7 @@
         <div class="col-md-12">
 				  <card>
 				    <h4 slot="header" class="card-title">New Supplier</h4>
-	          <supplier-form/>
+	          <supplier-form :supplier="newSupplier" />
   				</card>
         </div>
       </div>
@@ -20,10 +20,16 @@
     components: {
       Card,
       SupplierForm
+    },
+    data() {
+      return {
+        newSupplier: {
+          name: '',
+          address: '',
+          phone_numer: '',
+          external_urls: ''
+        }
+      }
     }
   }
-
 </script>
-<style>
-
-</style>

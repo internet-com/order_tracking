@@ -21,6 +21,7 @@ import NewPurchaseOrder from 'src/components/Dashboard/Views/PurchaseOrders/NewP
 import EditPurchaseOrder from 'src/components/Dashboard/Views/PurchaseOrders/EditPurchaseOrder.vue'
 import Suppliers from 'src/components/Dashboard/Views/Suppliers/Suppliers.vue'
 import NewSupplier from 'src/components/Dashboard/Views/Suppliers/NewSupplier.vue'
+import EditSupplier from 'src/components/Dashboard/Views/Suppliers/EditSupplier.vue'
 import Customers from 'src/components/Dashboard/Views/Customers/Customers.vue'
 import NewCustomer from 'src/components/Dashboard/Views/Customers/NewCustomer.vue'
 import EditCustomer from 'src/components/Dashboard/Views/Customers/EditCustomer.vue'
@@ -110,6 +111,11 @@ const routes = [
         path: 'suppliers/new',
         name: 'NewSupplier',
         component: NewSupplier
+      },
+      {
+        path: 'suppliers/:supplierId/edit',
+        name: 'EditSupplier',
+        component: EditSupplier
       },
       {
         path: 'user',
