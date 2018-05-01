@@ -23,7 +23,10 @@
     },
     data() {
       return {
-        newProduct: {}
+        newProduct: {
+          price: 0,
+          unit: 1
+        }
       }
     }
   }
