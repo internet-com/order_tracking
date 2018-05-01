@@ -23,6 +23,7 @@
                   <td>{{ product.description }}</td>
                   <td>{{ product.external_urls }}</td>
                   <td>{{ product.count }}</td>
+                  <td>{{ product.forecast_count }}</td>
                   <td>
                       <router-link :to="{ name: 'EditProduct', params: { productId: product.id } }">
                         <el-button type="warning" icon="el-icon-edit" circle></el-button>
@@ -52,6 +53,7 @@
     'Description',
     'External Urls',
     'Remaining',
+    'Forecast',
     'Actions'
   ]
   export default {
