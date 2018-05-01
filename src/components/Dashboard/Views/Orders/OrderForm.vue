@@ -7,7 +7,7 @@
               Customer
             </label>
             <div>
-              <el-select v-model="order.customer_id" filterable placeholder="Customer">
+              <el-select v-model="order.customer_id" filterable placeholder="Customer" @change="updateShippingAddress">
                 <el-option
                   v-for="customer in customers"
                   :key="customer.id"
@@ -141,6 +141,9 @@
       },
       submitButtonLabel() {
         return this.isEditForm ? 'Update Order' : 'Create Order'
+      },
+      customer() {
+        return this.customers.find(customer => customer.id == this.order.customer_id)
       }
     },
     methods: {
@@ -156,6 +159,9 @@
           this.$router.push({ name: 'Orders' });
           this.$customNotify(successMessage, 'success')
         })
+      },
+      updateShippingAddress() {
+        this.order.shipping_address = this.customer.address
       }
     },
     created () {
