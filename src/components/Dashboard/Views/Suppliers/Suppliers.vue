@@ -21,7 +21,7 @@
                   <td>{{ supplier.phone_number }}</td>
                   <td>{{ supplier.address }}</td>
                   <td>{{ supplier.external_urls }}</td>
-                  <td>
+                  <td class="actions">
                       <router-link :to="{ name: 'EditSupplier', params: { supplierId: supplier.id } }">
                         <el-button type="warning" icon="el-icon-edit" circle></el-button>
                       </router-link>

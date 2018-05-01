@@ -1,5 +1,10 @@
 .table {
 	margin-top: 10px;
+  td {
+    &.actions {
+      min-width: 120px;
+    }
+  }
 }
 
 /* elementUI */

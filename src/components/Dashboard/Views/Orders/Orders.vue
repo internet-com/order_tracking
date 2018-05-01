@@ -22,7 +22,7 @@
                   <td>{{ order.notes }}</td>
                   <td>{{ order.total }}</td>
                   <td><el-tag :type="stateType(order)" class="order__state">{{ order.state }}</el-tag></td>
-                  <td>
+                  <td class="actions">
                       <router-link :to="{ name: 'EditOrder', params: { orderId: order.id } }">
                         <el-button type="warning" icon="el-icon-edit" circle></el-button>
                       </router-link>

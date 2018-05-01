@@ -24,7 +24,7 @@
                   <td>{{ product.external_urls }}</td>
                   <td>{{ product.count }}</td>
                   <td>{{ product.forecast_count }}</td>
-                  <td>
+                  <td class="actions">
                       <router-link :to="{ name: 'EditProduct', params: { productId: product.id } }">
                         <el-button type="warning" icon="el-icon-edit" circle></el-button>
                       </router-link>
