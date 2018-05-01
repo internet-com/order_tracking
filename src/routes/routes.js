@@ -12,6 +12,7 @@ import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 import Products from 'src/components/Dashboard/Views/Products/Products.vue'
 import NewProduct from 'src/components/Dashboard/Views/Products/NewProduct.vue'
+import EditProduct from 'src/components/Dashboard/Views/Products/EditProduct.vue'
 import Orders from 'src/components/Dashboard/Views/Orders/Orders.vue'
 import NewOrder from 'src/components/Dashboard/Views/Orders/NewOrder.vue'
 import EditOrder from 'src/components/Dashboard/Views/Orders/EditOrder.vue'
@@ -48,6 +49,11 @@ const routes = [
         path: 'products/new',
         name: 'NewProduct',
         component: NewProduct
+      },
+      {
+        path: 'products/:productId/edit',
+        name: 'EditProduct',
+        component: EditProduct
       },
       {
         path: 'customers',

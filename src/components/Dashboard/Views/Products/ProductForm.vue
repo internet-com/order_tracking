@@ -51,9 +51,7 @@
       </div>
       <div>
         <router-link :to="{ name: 'Products' }" class="btn btn-default btn-fill">Cancel</router-link>
-        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="createProduct">
-          Create Product
-        </button>
+        <button type="submit" class="btn btn-primary btn-fill" @click.prevent="submit">{{ submitButtonLabel }}</button>
       </div>
       <div class="clearfix"></div>
     </form>
@@ -79,19 +77,33 @@
     }
   ]
   export default {
+    props: {
+      product: Object
+    },
     data () {
       return {
-        product: {
-          name: '',
-          unit: '',
-          price: '',
-          description: '',
-          external_urls: '',
-        },
         unitOptions,
       }
     },
+    computed: {
+      isEditForm() {
+        return !!this.product.id
+      },
+      actionName(){
+        return this.isEditForm ? 'products/updateProduct' : 'products/createProduct'
+      },
+      submitButtonLabel() {
+        return this.isEditForm ? 'Update Product' : 'Create Product'
+      },
+    },
     methods: {
+      submit () {
+        let successMessage = this.isEditForm ? "Product has been updated successfully" : "Product has been created successfully"
+        this.$store.dispatch(this.actionName, this.product).then(() => {
+          this.$router.push({ name: 'Products' });
+          this.$customNotify(successMessage, 'success')
+        })
+      },
       createProduct () {
         this.$store.dispatch('products/createProduct', this.product).then(product => {
           this.$router.push({ name: 'Products' });

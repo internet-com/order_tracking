@@ -10,10 +10,28 @@
             </template>
             <div class="table-responsive">
               <router-link :to="{ name: 'NewProduct' }" class="btn btn-fill btn-primary">Add new product</router-link>
-              <l-table class="table-hover table-striped"
-                       :columns="tableColumns"
-                       :data="products">
-              </l-table>
+              <table class="table table-hover table-striped">
+                <thead>
+                  <th v-for="column in tableColumns">{{ column }}</th>
+                </thead>
+                <tbody>
+                <tr v-for="product in products">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.unit }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.description }}</td>
+                  <td>{{ product.external_urls }}</td>
+                  <td>{{ product.count }}</td>
+                  <td>
+                      <router-link :to="{ name: 'EditProduct', params: { productId: product.id } }">
+                        <el-button type="warning" icon="el-icon-edit" circle></el-button>
+                      </router-link>
+                      <el-button type="danger" icon="el-icon-delete" circle @click="remove(product)"></el-button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </card>
         </div>
@@ -26,15 +44,16 @@
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
 
-  const tableColumns = {
-    id: "Id",
-    name: 'Name',
-    unit: 'Unit',
-    price: 'Price',
-    description: 'Description',
-    external_urls: 'External Urls',
-    count: 'Remaining'
-  }
+  const tableColumns = [
+    "Id",
+    'Name',
+    'Unit',
+    'Price',
+    'Description',
+    'External Urls',
+    'Remaining',
+    'Actions'
+  ]
   export default {
     components: {
       LTable,
@@ -49,6 +68,15 @@
       ...mapGetters({
         products: 'products/allProducts'
       })
+    },
+    methods: {
+      remove(product) {
+        this.$confirm('Are you sure to delete this product?').then(() => {
+          this.$store.dispatch('products/deleteProduct', product).then(() => {
+            this.$customNotify("Product has been deleted successfully")
+          })
+        })
+      }
     },
     created () {
       this.$store.dispatch('products/getAllProducts')
