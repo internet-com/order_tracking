@@ -6,26 +6,26 @@
           <card>
             <template slot="header">
               <h4 class="card-title">PurchaseOrders</h4>
-              <p class="card-category">List of all purchase orders of the shop</p>
+              <p class="card-category">List of all purchaseOrders of the shop</p>
             </template>
             <div class="table-responsive">
-              <router-link :to="{ name: 'NewPurchaseOrder' }" class="btn btn-fill btn-primary">Add new purchase order</router-link>
+              <router-link :to="{ name: 'NewPurchaseOrder' }" class="btn btn-fill btn-primary">Add new purchaseOrder</router-link>
               <table class="table table-hover table-striped">
                 <thead>
                   <th v-for="column in tableColumns">{{ column }}</th>
                 </thead>
                 <tbody>
-                <tr v-for="purchase_order in purchase_orders">
-                  <td>{{ purchase_order.id }}</td>
-                  <td>{{ purchase_order.supplier.name }}</td>
-                  <td>{{ purchase_order.notes }}</td>
-                  <td>{{ purchase_order.total }}</td>
-                  <td><el-tag :type="stateType(purchase_order)" class="order__state">{{ purchase_order.state }}</el-tag></td>
+                <tr v-for="purchaseOrder in purchaseOrders">
+                  <td>{{ purchaseOrder.id }}</td>
+                  <td>{{ purchaseOrder.supplier && purchaseOrder.supplier.name }}</td>
+                  <td>{{ purchaseOrder.notes }}</td>
+                  <td>{{ purchaseOrder.total }}</td>
+                  <td><el-tag :type="stateType(purchaseOrder)" class="order__state">{{ purchaseOrder.state }}</el-tag></td>
                   <td>
-                    <el-row>
-                      <el-button type="warning" icon="el-icon-edit" circle></el-button>
-                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                    </el-row>
+                      <router-link :to="{ name: 'EditPurchaseOrder', params: { purchaseOrderId: purchaseOrder.id } }">
+                        <el-button type="warning" icon="el-icon-edit" circle></el-button>
+                      </router-link>
+                      <el-button type="danger" icon="el-icon-delete" circle @click="remove(purchaseOrder)"></el-button>
                   </td>
                 </tr>
                 </tbody>
@@ -40,9 +40,9 @@
 <script>
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import { mapGetters } from 'vuex'
-  import { PurchaseOrderState } from '@/settings/purchase_orders'
+  import { PurchaseOrderState } from '@/settings/PurchaseOrders'
 
-  const tableColumns = ['Id', 'Supplier Name', 'Notes', 'Total', 'Actions']
+  const tableColumns = ['Id', 'Supplier Name', 'Notes', 'Total', 'State', 'Actions']
 
   export default {
     components: {
@@ -55,12 +55,12 @@
     },
     computed: {
       ...mapGetters({
-        purchase_orders: 'purchase_orders/allPurchaseOrders'
+        purchaseOrders: 'purchase_orders/allPurchaseOrders'
       })
     },
     methods: {
-      stateType(purchase_order) {
-        switch(purchase_order.state){
+      stateType(purchaseOrder) {
+        switch(purchaseOrder.state){
           case PurchaseOrderState.requested:
             return 'info'
           case PurchaseOrderState.processing:
@@ -68,6 +68,13 @@
           case PurchaseOrderState.completed:
             return  'success'
         }
+      },
+      remove(purchaseOrder) {
+        this.$confirm('Are you sure to delete this purchase order?').then(() => {
+          this.$store.dispatch('purchase_orders/deletePurchaseOrder', purchaseOrder).then(() => {
+            this.$customNotify("Purchase order has been deleted successfully")
+          })
+        })
       }
     },
     created () {

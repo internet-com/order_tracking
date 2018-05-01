@@ -160,7 +160,6 @@
     },
     created () {
       this.$store.dispatch('customers/getAllCustomers')
-      this.$store.dispatch('orders/getAllOrders')
     }
   }
 

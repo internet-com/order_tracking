@@ -75,7 +75,7 @@
         }
       },
       remove(order) {
-        this.$confirm('Are you sure to close this dialog?').then(() => {
+        this.$confirm('Are you sure to delete this order?').then(() => {
           this.$store.dispatch('orders/deleteOrder', order).then(() => {
             this.$customNotify("Order has been deleted successfully")
           })

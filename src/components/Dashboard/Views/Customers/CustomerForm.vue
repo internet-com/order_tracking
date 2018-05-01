@@ -65,9 +65,6 @@
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       }
-    },
-    created () {
-      this.$store.dispatch('customers/getAllCustomers')
     }
   }
 
