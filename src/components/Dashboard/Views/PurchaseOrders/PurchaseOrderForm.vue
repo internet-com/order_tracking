@@ -88,7 +88,7 @@
 </template>
 <script>
   import LTable from 'src/components/UIComponents/Table.vue'
-  import OrderItemsSelect from '../Orders/OrderItemsSelect'
+  import OrderItemsSelect from 'src/components/Dashboard/Views/Orders/OrderItemsSelect'
   import { mapGetters } from 'vuex'
   import { PurchaseOrderState } from '@/settings/PurchaseOrders'
 

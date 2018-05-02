@@ -20,7 +20,7 @@ Vue.use(customNotify)
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
-  mode: 'history', // remove hashbang
+  // mode: 'history', // remove hashbang
   linkActiveClass: 'nav-item active'
 })
 

@@ -4,7 +4,7 @@
 
 This project is built on top of Vue js with [Vue Light Bootstrap Dashboard](https://www.creative-tim.com/product/vue-light-bootstrap-dashboard) template. The dashboard includes Bootstrap 4, vue-router, chartist, google-maps and several other plugins/components.
 
-Check the [Template's Live Demo here](vuejs.creative-tim.com/vue-light-bootstrap-dashboard).
+Check the [ShopSister's Live Demo here](https://shopsister.herokuapp.com).
 
 ![](static/Dashboard.PNG)
 ## :rocket: Getting started
