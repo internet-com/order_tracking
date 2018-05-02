@@ -1,7 +1,7 @@
 {
-  "name": "OrderTrackingSystem",
+  "name": "ShopSister",
   "version": "0.0.1",
-  "description": "Order Tracking System",
+  "description": "An Order Tracking System",
   "author": "Linh Nguyen <nguyenvanlinh.bk@gmail.com>",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --fix --ext .js,.vue src test/unit/specs",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
