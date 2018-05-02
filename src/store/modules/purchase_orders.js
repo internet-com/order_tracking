@@ -51,7 +51,7 @@ const actions = {
   },
   deletePurchaseOrder ({ commit }, purchaseOrder) {
     return PurchaseOrdersAPI.deletePurchaseOrder(purchaseOrder).then(response => {
-      let purchaseOrders = state.all.filter(o => o.id != purchaseOrder.id)
+      let purchaseOrders = state.all.filter(o => o.id !== purchaseOrder.id)
       commit('setPurchaseOrders', purchaseOrders)
       return Promise.resolve(purchaseOrder)
     }).catch(error => {

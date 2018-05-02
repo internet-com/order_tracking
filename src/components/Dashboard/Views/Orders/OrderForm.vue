@@ -143,7 +143,7 @@
         return this.isEditForm ? 'Update Order' : 'Create Order'
       },
       customer () {
-        return this.customers.find(customer => customer.id == this.order.customer_id)
+        return this.customers.find(customer => customer.id === this.order.customer_id)
       }
     },
     methods: {

@@ -7,5 +7,5 @@ const OrderState = {
 }
 
 export {
-	OrderState
+  OrderState
 }

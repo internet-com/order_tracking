@@ -51,7 +51,7 @@ const actions = {
   },
   deleteOrder ({ commit }, order) {
     return OrdersAPI.deleteOrder(order).then(response => {
-      let orders = state.all.filter(o => o.id != order.id)
+      let orders = state.all.filter(o => o.id !== order.id)
       commit('setOrders', orders)
       return Promise.resolve(order)
     }).catch(error => {

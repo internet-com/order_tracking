@@ -4,7 +4,7 @@ export default {
       let component = {
         template: `<span><b>${message}</b></span>`
       }
-      let icon = (type == 'success') ? 'el-icon-success' : 'el-icon-warning'
+      let icon = (type === 'success') ? 'el-icon-success' : 'el-icon-warning'
       this.$notifications.notify({
         horizontalAlign: 'center',
         verticalAlign: 'top',

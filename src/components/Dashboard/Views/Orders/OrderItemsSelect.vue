@@ -54,52 +54,52 @@
 
   const tableColumns = ['Name', 'Price', 'Quantity', 'Total', 'Action']
 
-export default {
-  props: ['value'],
-  data () {
-  return {
-  order_items: [],
-    addingItem: {
-      product_id: '',
-      price: 0,
-      quantity: 1
+  export default {
+    props: ['value'],
+    data () {
+      return {
+        order_items: [],
+        addingItem: {
+          product_id: '',
+          price: 0,
+          quantity: 1
+        },
+        tableColumns
+      }
     },
-    tableColumns
-}
-},
-  watch: {
-  value () {
-  this.order_items = this.value.slice(0) // clone value
-}
-},
-  computed: {
-    ...mapGetters({
-      products: 'products/allProducts'
-    }),
-    formattedOrderItems () {
-      return this.activeOrderItems.map((item) => {
-        let product = this.products.find(product => product.id == item.product_id)
-        let total = product ? product.price * item.quantity : 0
-        return {
-          product,
-          total,
-          quantity: item.quantity
-        }
-      })
+    watch: {
+      value () {
+        this.order_items = this.value.slice(0) // clone value
+      }
     },
-    activeOrderItems () {
-      return this.order_items.filter(item => !item._destroy)
+    computed: {
+      ...mapGetters({
+        products: 'products/allProducts'
+      }),
+      formattedOrderItems () {
+        return this.activeOrderItems.map((item) => {
+          let product = this.products.find(product => product.id === item.product_id)
+          let total = product ? product.price * item.quantity : 0
+          return {
+            product,
+            total,
+            quantity: item.quantity
+          }
+        })
+      },
+      activeOrderItems () {
+        return this.order_items.filter(item => !item._destroy)
+      },
+      hasSelectedItems () {
+        return this.order_items.length > 0
+      }
     },
-    hasSelectedItems () {
-      return this.order_items.length > 0
-    }
-},
     methods: {
       addItem () {
-        let product = this.products.find(product => product.id == this.addingItem.product_id)
+        let product = this.products.find(product => product.id === this.addingItem.product_id)
         if (!product) return
         this.addingItem.price = product.price
-        let existingItem = this.activeOrderItems.find(item => item.product_id == this.addingItem.product_id)
+        let existingItem = this.activeOrderItems.find(item => item.product_id === this.addingItem.product_id)
         if (existingItem) {
           existingItem.quantity += parseInt(this.addingItem.quantity)
         } else {
@@ -109,21 +109,21 @@ export default {
         this.update()
       },
       removeItem (productId) {
-        let item = this.activeOrderItems.find(item => item.product_id == productId)
+        let item = this.activeOrderItems.find(item => item.product_id === productId)
         if (item.id) {
           item._destroy = true
         } else {
-          this.order_items = this.order_items.filter(item => item.product_id != productId)
+          this.order_items = this.order_items.filter(item => item.product_id !== productId)
         }
         this.update()
       },
       update () {
-	      this.$emit('input', this.order_items)
-	    }
+        this.$emit('input', this.order_items)
+      }
     },
     created () {
       this.order_items = this.value.slice(0)
       this.$store.dispatch('products/getAllProducts')
     }
-}
+  }
 </script>

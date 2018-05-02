@@ -47,7 +47,7 @@ const actions = {
   },
   deleteProduct ({ commit }, product) {
     return ProductsAPI.deleteProduct(product).then(response => {
-      let products = state.all.filter(o => o.id != product.id)
+      let products = state.all.filter(o => o.id !== product.id)
       commit('setProducts', products)
       return Promise.resolve(product)
     }).catch(error => {

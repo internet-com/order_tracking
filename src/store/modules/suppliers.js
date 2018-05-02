@@ -47,7 +47,7 @@ const actions = {
   },
   deleteSupplier ({ commit }, supplier) {
     return SuppliersAPI.deleteSupplier(supplier).then(response => {
-      let suppliers = state.all.filter(o => o.id != supplier.id)
+      let suppliers = state.all.filter(o => o.id !== supplier.id)
       commit('setSuppliers', suppliers)
       return Promise.resolve(supplier)
     }).catch(error => {

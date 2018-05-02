@@ -47,7 +47,7 @@ const actions = {
   },
   deleteCustomer ({ commit }, customer) {
     return CustomersAPI.deleteCustomer(customer).then(response => {
-      let customers = state.all.filter(o => o.id != customer.id)
+      let customers = state.all.filter(o => o.id !== customer.id)
       commit('setCustomers', customers)
       return Promise.resolve(customer)
     }).catch(error => {

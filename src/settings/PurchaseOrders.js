@@ -5,5 +5,5 @@ const PurchaseOrderState = {
 }
 
 export {
-	PurchaseOrderState
+  PurchaseOrderState
 }
