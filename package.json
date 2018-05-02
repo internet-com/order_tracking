@@ -6,11 +6,12 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "cross-env ENABLE_ESLINT=true node build/dev-server.js",
-    "build": "cross-env ENABLE_ESLINT=true node build/build.js",
+    "start": "node server.js",
+    "build": "cross-env ENABLE_ESLINT=false node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --fix --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --fix --ext .js,.vue src test/unit/specs",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -54,7 +55,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.14.1",
+    "express": "^4.16.3",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.11.1",
     "friendly-errors-webpack-plugin": "^1.1.3",
