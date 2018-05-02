@@ -21,7 +21,7 @@
       Card,
       OrderForm
     },
-    data() {
+    data () {
       return {
         newOrder: {
           customer_id: 1,

@@ -26,11 +26,11 @@
       ...mapGetters({
         supplier: 'suppliers/supplier'
       }),
-      supplierId() {
+      supplierId () {
         return this.$route.params.supplierId
       }
     },
-    mounted() {
+    mounted () {
       this.$store.dispatch('suppliers/getSupplier', this.supplierId)
     }
   }

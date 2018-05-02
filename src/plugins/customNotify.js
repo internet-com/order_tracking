@@ -1,6 +1,6 @@
 export default {
-  install(Vue) {
-    Vue.prototype.$customNotify = function (message, type='info') {
+  install (Vue) {
+    Vue.prototype.$customNotify = function (message, type = 'info') {
       let component = {
         template: `<span><b>${message}</b></span>`
       }

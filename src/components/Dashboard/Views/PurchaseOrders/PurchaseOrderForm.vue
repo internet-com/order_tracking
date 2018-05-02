@@ -100,7 +100,7 @@
     props: {
       purchaseOrder: Object
     },
-    data() {
+    data () {
       return {
         PurchaseOrderState
       }
@@ -110,42 +110,42 @@
         products: 'products/allProducts',
         suppliers: 'suppliers/allSuppliers'
       }),
-      itemsTotal(){
-        return this.activePurchaseOrderItems.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+      itemsTotal () {
+        return this.activePurchaseOrderItems.reduce((sum, item) => item.price * item.quantity + sum, 0)
       },
-      total(){
+      total () {
         return this.itemsTotal + parseInt(this.purchaseOrder.shipment_total) + parseInt(this.purchaseOrder.adjustment_total)
       },
-      activePurchaseOrderItems() {
+      activePurchaseOrderItems () {
         return this.purchaseOrder.purchase_order_items_attributes.filter(item => !item._destroy)
       },
-      hasSelectedItems() {
+      hasSelectedItems () {
         return this.activePurchaseOrderItems.length > 0
       },
-      hasSupplier(){
+      hasSupplier () {
         return !!this.purchaseOrder.supplier_id
       },
-      isEditForm() {
+      isEditForm () {
         return !!this.purchaseOrder.id
       },
-      actionName(){
+      actionName () {
         return this.isEditForm ? 'purchase_orders/updatePurchaseOrder' : 'purchase_orders/createPurchaseOrder'
       },
-      submitButtonLabel() {
+      submitButtonLabel () {
         return this.isEditForm ? 'Update PurchaseOrder' : 'Create PurchaseOrder'
       }
     },
     methods: {
       submit () {
-        if(!this.hasSupplier){
-          return this.$customNotify("Please select a supplier", 'danger')
+        if (!this.hasSupplier) {
+          return this.$customNotify('Please select a supplier', 'danger')
         }
-        if(!this.hasSelectedItems){
-          return this.$customNotify("Please add at least one product", 'danger')
+        if (!this.hasSelectedItems) {
+          return this.$customNotify('Please add at least one product', 'danger')
         }
-        let successMessage = this.isEditForm ? "PurchaseOrder has been updated successfully" : "PurchaseOrder has been created successfully"
+        let successMessage = this.isEditForm ? 'PurchaseOrder has been updated successfully' : 'PurchaseOrder has been created successfully'
         this.$store.dispatch(this.actionName, this.purchaseOrder).then(() => {
-          this.$router.push({ name: 'PurchaseOrders' });
+          this.$router.push({ name: 'PurchaseOrders' })
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))

@@ -277,7 +277,7 @@
         statistics: 'statistics/statistics'
       })
     },
-    created() {
+    created () {
       this.$store.dispatch('statistics/getStatistics')
     }
   }

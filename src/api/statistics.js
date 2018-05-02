@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export default {
-  getStatistics() {
+  getStatistics () {
     return Vue.axios.get('statistics')
-  },
+  }
 }

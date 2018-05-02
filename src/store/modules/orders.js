@@ -24,14 +24,14 @@ const actions = {
       commit('setOrders', orders)
     })
   },
-  getOrder({ commit }, orderId){
+  getOrder ({ commit }, orderId) {
     OrdersAPI.getOrder(orderId).then(response => {
       let order = response.data
       order.order_items_attributes = order.order_items
       commit('setOrder', order)
     })
   },
-  createOrder({ commit }, order){
+  createOrder ({ commit }, order) {
     return OrdersAPI.createOrder(order).then(response => {
       let order = response.data
       return Promise.resolve(order)
@@ -40,7 +40,7 @@ const actions = {
       return Promise.reject(errorMessages)
     })
   },
-  updateOrder({ commit }, order){
+  updateOrder ({ commit }, order) {
     return OrdersAPI.updateOrder(order).then(response => {
       let order = response.data
       return Promise.resolve(order)
@@ -49,7 +49,7 @@ const actions = {
       return Promise.reject(errorMessages)
     })
   },
-  deleteOrder({ commit }, order){
+  deleteOrder ({ commit }, order) {
     return OrdersAPI.deleteOrder(order).then(response => {
       let orders = state.all.filter(o => o.id != order.id)
       commit('setOrders', orders)
@@ -58,7 +58,7 @@ const actions = {
       let errorMessages = error.response.data
       return Promise.reject(errorMessages)
     })
-  },
+  }
 }
 
 // mutations
@@ -66,7 +66,7 @@ const mutations = {
   setOrders (state, orders) {
     state.all = orders
   },
-  setOrder(state, order){
+  setOrder (state, order) {
     state.order = order
   }
 }

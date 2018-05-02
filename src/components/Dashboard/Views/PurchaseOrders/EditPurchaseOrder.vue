@@ -26,11 +26,11 @@
       ...mapGetters({
         purchaseOrder: 'purchase_orders/purchaseOrder'
       }),
-      purchaseOrderId() {
+      purchaseOrderId () {
         return this.$route.params.purchaseOrderId
       }
     },
-    mounted() {
+    mounted () {
       this.$store.dispatch('purchase_orders/getPurchaseOrder', this.purchaseOrderId)
     }
   }

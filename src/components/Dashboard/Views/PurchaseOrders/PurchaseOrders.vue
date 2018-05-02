@@ -59,20 +59,20 @@
       })
     },
     methods: {
-      stateType(purchaseOrder) {
-        switch(purchaseOrder.state){
+      stateType (purchaseOrder) {
+        switch (purchaseOrder.state) {
           case PurchaseOrderState.requested:
             return 'info'
           case PurchaseOrderState.processing:
-            return  ''
+            return ''
           case PurchaseOrderState.completed:
-            return  'success'
+            return 'success'
         }
       },
-      remove(purchaseOrder) {
+      remove (purchaseOrder) {
         this.$confirm('Are you sure to delete this purchase order?').then(() => {
           this.$store.dispatch('purchase_orders/deletePurchaseOrder', purchaseOrder).then(() => {
-            this.$customNotify("Purchase order has been deleted successfully")
+            this.$customNotify('Purchase order has been deleted successfully')
           })
         })
       }

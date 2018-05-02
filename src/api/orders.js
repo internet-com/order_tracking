@@ -1,19 +1,19 @@
 import Vue from 'vue'
 
 export default {
-  getOrders() {
+  getOrders () {
     return Vue.axios.get('orders')
   },
-  getOrder(id) {
-    return Vue.axios.get(`orders/${ id }`)
+  getOrder (id) {
+    return Vue.axios.get(`orders/${id}`)
   },
-  createOrder(order) {
+  createOrder (order) {
     return Vue.axios.post('orders', { order })
   },
   updateOrder (order) {
-    return Vue.axios.put(`orders/${ order.id }`, { order })
+    return Vue.axios.put(`orders/${order.id}`, { order })
   },
   deleteOrder (order) {
-    return Vue.axios.delete(`orders/${ order.id }`)
+    return Vue.axios.delete(`orders/${order.id}`)
   }
 }

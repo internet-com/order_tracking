@@ -47,21 +47,21 @@
       customer: Object
     },
     computed: {
-      isEditForm() {
+      isEditForm () {
         return !!this.customer.id
       },
-      actionName(){
+      actionName () {
         return this.isEditForm ? 'customers/updateCustomer' : 'customers/createCustomer'
       },
-      submitButtonLabel() {
+      submitButtonLabel () {
         return this.isEditForm ? 'Update Customer' : 'Create Customer'
-      },
+      }
     },
     methods: {
       submit () {
-        let successMessage = this.isEditForm ? "Customer has been updated successfully" : "Customer has been created successfully"
+        let successMessage = this.isEditForm ? 'Customer has been updated successfully' : 'Customer has been created successfully'
         this.$store.dispatch(this.actionName, this.customer).then(() => {
-          this.$router.push({ name: 'Customers' });
+          this.$router.push({ name: 'Customers' })
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))

@@ -21,7 +21,7 @@
       Card,
       CustomerForm
     },
-    data() {
+    data () {
       return {
         newCustomer: {
           name: '',

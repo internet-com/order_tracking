@@ -7,12 +7,12 @@ const state = {
 
 // getters
 const getters = {
-  statistics: state => state.statistics,
+  statistics: state => state.statistics
 }
 
 // actions
 const actions = {
-  getStatistics({ commit }) {
+  getStatistics ({ commit }) {
     StatisticsAPI.getStatistics().then(response => {
       let statistics = response.data
       commit('setStatistics', statistics)

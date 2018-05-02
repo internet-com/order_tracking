@@ -108,7 +108,7 @@
     props: {
       order: Object
     },
-    data() {
+    data () {
       return {
         OrderState
       }
@@ -118,51 +118,51 @@
         products: 'products/allProducts',
         customers: 'customers/allCustomers'
       }),
-      itemsTotal(){
-        return this.activeOrderItems.reduce(((sum, item) => item.price * item.quantity + sum), 0)
+      itemsTotal () {
+        return this.activeOrderItems.reduce((sum, item) => item.price * item.quantity + sum, 0)
       },
-      total(){
+      total () {
         return this.itemsTotal + parseInt(this.order.shipment_total) + parseInt(this.order.adjustment_total)
       },
-      activeOrderItems() {
+      activeOrderItems () {
         return this.order.order_items_attributes.filter(item => !item._destroy)
       },
-      hasSelectedItems() {
+      hasSelectedItems () {
         return this.activeOrderItems.length > 0
       },
-      hasCustomer(){
+      hasCustomer () {
         return !!this.order.customer_id
       },
-      isEditForm() {
+      isEditForm () {
         return !!this.order.id
       },
-      actionName(){
+      actionName () {
         return this.isEditForm ? 'orders/updateOrder' : 'orders/createOrder'
       },
-      submitButtonLabel() {
+      submitButtonLabel () {
         return this.isEditForm ? 'Update Order' : 'Create Order'
       },
-      customer() {
+      customer () {
         return this.customers.find(customer => customer.id == this.order.customer_id)
       }
     },
     methods: {
       submit () {
-        if(!this.hasCustomer){
-          return this.$customNotify("Please select a customer", 'danger')
+        if (!this.hasCustomer) {
+          return this.$customNotify('Please select a customer', 'danger')
         }
-        if(!this.hasSelectedItems){
-          return this.$customNotify("Please add at least one product", 'danger')
+        if (!this.hasSelectedItems) {
+          return this.$customNotify('Please add at least one product', 'danger')
         }
-        let successMessage = this.isEditForm ? "Order has been updated successfully" : "Order has been created successfully"
+        let successMessage = this.isEditForm ? 'Order has been updated successfully' : 'Order has been created successfully'
         this.$store.dispatch(this.actionName, this.order).then(() => {
-          this.$router.push({ name: 'Orders' });
+          this.$router.push({ name: 'Orders' })
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))
         })
       },
-      updateShippingAddress() {
+      updateShippingAddress () {
         this.order.shipping_address = this.customer.address
       }
     },

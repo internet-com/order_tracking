@@ -1,19 +1,19 @@
 import Vue from 'vue'
 
 export default {
-  getSuppliers() {
+  getSuppliers () {
     return Vue.axios.get('suppliers')
   },
-  getSupplier(id) {
-    return Vue.axios.get(`suppliers/${ id }`)
+  getSupplier (id) {
+    return Vue.axios.get(`suppliers/${id}`)
   },
-  createSupplier(supplier) {
+  createSupplier (supplier) {
     return Vue.axios.post('suppliers', { supplier })
   },
   updateSupplier (supplier) {
-    return Vue.axios.put(`suppliers/${ supplier.id }`, { supplier })
+    return Vue.axios.put(`suppliers/${supplier.id}`, { supplier })
   },
   deleteSupplier (supplier) {
-    return Vue.axios.delete(`suppliers/${ supplier.id }`)
+    return Vue.axios.delete(`suppliers/${supplier.id}`)
   }
 }

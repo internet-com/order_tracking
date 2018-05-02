@@ -1,7 +1,7 @@
 const PurchaseOrderState = {
-	requested		: 'requested',
-	processing	: 'processing',
-	completed		: 'completed'
+  requested: 'requested',
+  processing: 'processing',
+  completed: 'completed'
 }
 
 export {

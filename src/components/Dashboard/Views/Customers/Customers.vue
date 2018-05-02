@@ -60,12 +60,12 @@
       })
     },
     methods: {
-      remove(customer) {
+      remove (customer) {
         this.$confirm('Are you sure to delete this customer?').then(() => {
           this.$store.dispatch('customers/deleteCustomer', customer).then((customer) => {
-            this.$customNotify("Customer has been deleted successfully")
+            this.$customNotify('Customer has been deleted successfully')
           }).catch((errorMessages) => {
-            this.$customNotify("Customer has been linked to some order/purchase orders. Please remove them first! Consider to use hiding customer feature instead of removing.", 'danger')
+            this.$customNotify('Customer has been linked to some order/purchase orders. Please remove them first! Consider to use hiding customer feature instead of removing.', 'danger')
           })
         })
       }

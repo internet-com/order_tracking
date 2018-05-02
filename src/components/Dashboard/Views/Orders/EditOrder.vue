@@ -26,11 +26,11 @@
       ...mapGetters({
         order: 'orders/order'
       }),
-      orderId() {
+      orderId () {
         return this.$route.params.orderId
       }
     },
-    mounted() {
+    mounted () {
       this.$store.dispatch('orders/getOrder', this.orderId)
     }
   }

@@ -21,7 +21,7 @@
       Card,
       SupplierForm
     },
-    data() {
+    data () {
       return {
         newSupplier: {
           name: '',

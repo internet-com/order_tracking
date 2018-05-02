@@ -82,25 +82,25 @@
     },
     data () {
       return {
-        unitOptions,
+        unitOptions
       }
     },
     computed: {
-      isEditForm() {
+      isEditForm () {
         return !!this.product.id
       },
-      actionName(){
+      actionName () {
         return this.isEditForm ? 'products/updateProduct' : 'products/createProduct'
       },
-      submitButtonLabel() {
+      submitButtonLabel () {
         return this.isEditForm ? 'Update Product' : 'Create Product'
-      },
+      }
     },
     methods: {
       submit () {
-        let successMessage = this.isEditForm ? "Product has been updated successfully" : "Product has been created successfully"
+        let successMessage = this.isEditForm ? 'Product has been updated successfully' : 'Product has been created successfully'
         this.$store.dispatch(this.actionName, this.product).then(() => {
-          this.$router.push({ name: 'Products' });
+          this.$router.push({ name: 'Products' })
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))

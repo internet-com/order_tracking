@@ -46,7 +46,7 @@
   import { mapGetters } from 'vuex'
 
   const tableColumns = [
-    "Id",
+    'Id',
     'Name',
     'Unit',
     'Price',
@@ -61,7 +61,7 @@
       LTable,
       Card
     },
-    data() {
+    data () {
       return {
         tableColumns
       }
@@ -72,12 +72,12 @@
       })
     },
     methods: {
-      remove(product) {
+      remove (product) {
         this.$confirm('Are you sure to delete this product?').then(() => {
           this.$store.dispatch('products/deleteProduct', product).then((product) => {
-            this.$customNotify("Product has been deleted successfully")
+            this.$customNotify('Product has been deleted successfully')
           }).catch((errorMessages) => {
-            this.$customNotify("Product has been linked to some order/purchase orders. Please remove them first! Consider to use hiding product feature instead of removing.", 'danger')
+            this.$customNotify('Product has been linked to some order/purchase orders. Please remove them first! Consider to use hiding product feature instead of removing.', 'danger')
           })
         })
       }

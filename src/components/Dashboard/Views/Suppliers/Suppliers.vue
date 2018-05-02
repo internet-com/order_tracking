@@ -60,12 +60,12 @@
       })
     },
     methods: {
-      remove(supplier) {
+      remove (supplier) {
         this.$confirm('Are you sure to delete this supplier?').then(() => {
           this.$store.dispatch('suppliers/deleteSupplier', supplier).then((supplier) => {
-            this.$customNotify("Supplier has been deleted successfully")
+            this.$customNotify('Supplier has been deleted successfully')
           }).catch((errorMessages) => {
-            this.$customNotify("Supplier has been linked to some order/purchase orders. Please remove them first! Consider to use hiding supplier feature instead of removing.", 'danger')
+            this.$customNotify('Supplier has been linked to some order/purchase orders. Please remove them first! Consider to use hiding supplier feature instead of removing.', 'danger')
           })
         })
       }

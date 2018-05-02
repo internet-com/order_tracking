@@ -47,21 +47,21 @@
       supplier: Object
     },
     computed: {
-      isEditForm() {
+      isEditForm () {
         return !!this.supplier.id
       },
-      actionName(){
+      actionName () {
         return this.isEditForm ? 'suppliers/updateSupplier' : 'suppliers/createSupplier'
       },
-      submitButtonLabel() {
+      submitButtonLabel () {
         return this.isEditForm ? 'Update Supplier' : 'Create Supplier'
-      },
+      }
     },
     methods: {
       submit () {
-        let successMessage = this.isEditForm ? "Supplier has been updated successfully" : "Supplier has been created successfully"
+        let successMessage = this.isEditForm ? 'Supplier has been updated successfully' : 'Supplier has been created successfully'
         this.$store.dispatch(this.actionName, this.supplier).then(() => {
-          this.$router.push({ name: 'Suppliers' });
+          this.$router.push({ name: 'Suppliers' })
           this.$customNotify(successMessage, 'success')
         }).catch(errorMessages => {
           errorMessages.forEach(message => this.$customNotify(message, 'danger'))

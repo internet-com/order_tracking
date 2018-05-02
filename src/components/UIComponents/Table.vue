@@ -22,7 +22,7 @@
       data: Array
     },
     computed: {
-      columnKeys(){
+      columnKeys () {
         return Object.keys(this.columns)
       }
     }

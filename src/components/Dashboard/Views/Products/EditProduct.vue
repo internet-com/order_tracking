@@ -26,11 +26,11 @@
       ...mapGetters({
         product: 'products/product'
       }),
-      productId() {
+      productId () {
         return this.$route.params.productId
       }
     },
-    mounted() {
+    mounted () {
       this.$store.dispatch('products/getProduct', this.productId)
     }
   }

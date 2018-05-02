@@ -21,7 +21,7 @@
       Card,
       ProductForm
     },
-    data() {
+    data () {
       return {
         newProduct: {
           name: '',

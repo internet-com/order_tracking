@@ -60,24 +60,24 @@
       })
     },
     methods: {
-      stateType(order) {
-        switch(order.state){
+      stateType (order) {
+        switch (order.state) {
           case OrderState.requested:
             return 'info'
           case OrderState.processing:
-            return  ''
+            return ''
           case OrderState.delivering:
-            return  'warning'
+            return 'warning'
           case OrderState.completed:
-            return  'success'
+            return 'success'
           case OrderState.returned:
-            return  'danger'
+            return 'danger'
         }
       },
-      remove(order) {
+      remove (order) {
         this.$confirm('Are you sure to delete this order?').then(() => {
           this.$store.dispatch('orders/deleteOrder', order).then(() => {
-            this.$customNotify("Order has been deleted successfully")
+            this.$customNotify('Order has been deleted successfully')
           })
         })
       }

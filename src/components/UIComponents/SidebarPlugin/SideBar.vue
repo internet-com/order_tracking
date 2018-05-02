@@ -40,7 +40,7 @@
     props: {
       title: {
         type: String,
-        default: "Order Tracking"
+        default: 'Order Tracking'
       },
       backgroundColor: {
         type: String,

@@ -26,11 +26,11 @@
       ...mapGetters({
         customer: 'customers/customer'
       }),
-      customerId() {
+      customerId () {
         return this.$route.params.customerId
       }
     },
-    mounted() {
+    mounted () {
       this.$store.dispatch('customers/getCustomer', this.customerId)
     }
   }

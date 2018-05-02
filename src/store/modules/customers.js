@@ -20,14 +20,14 @@ const actions = {
       commit('setCustomers', customers)
     })
   },
-  getCustomer({ commit }, customerId){
+  getCustomer ({ commit }, customerId) {
     CustomersAPI.getCustomer(customerId).then(response => {
       let customer = response.data
       customer.customer_items_attributes = customer.customer_items
       commit('setCustomer', customer)
     })
   },
-  createCustomer({ commit }, customer){
+  createCustomer ({ commit }, customer) {
     return CustomersAPI.createCustomer(customer).then(response => {
       let customer = response.data
       return Promise.resolve(customer)
@@ -36,7 +36,7 @@ const actions = {
       return Promise.reject(errorMessages)
     })
   },
-  updateCustomer({ commit }, customer){
+  updateCustomer ({ commit }, customer) {
     return CustomersAPI.updateCustomer(customer).then(response => {
       let customer = response.data
       return Promise.resolve(customer)
@@ -45,7 +45,7 @@ const actions = {
       return Promise.reject(errorMessages)
     })
   },
-  deleteCustomer({ commit }, customer){
+  deleteCustomer ({ commit }, customer) {
     return CustomersAPI.deleteCustomer(customer).then(response => {
       let customers = state.all.filter(o => o.id != customer.id)
       commit('setCustomers', customers)
@@ -54,7 +54,7 @@ const actions = {
       let errorMessages = error.response.data
       return Promise.reject(errorMessages)
     })
-  },
+  }
 }
 
 // mutations
@@ -62,7 +62,7 @@ const mutations = {
   setCustomers (state, customers) {
     state.all = customers
   },
-  setCustomer(state, customer){
+  setCustomer (state, customer) {
     state.customer = customer
   }
 }

@@ -21,7 +21,7 @@
       Card,
       PurchaseOrderForm
     },
-    data() {
+    data () {
       return {
         newPurchaseOrder: {
           supplier_id: 1,
